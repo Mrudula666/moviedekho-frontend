@@ -1,1 +1,33 @@
-<p>register works!</p>
+<div class="card m-auto mt-5 w-50 shadow border border-0 p-3">
+  <div class="d-flex flex-row justify-content-between">
+
+    <h2>Sign Up </h2>
+    <h2 class="text-primary">Movie Dekho</h2>
+  </div>
+  <div class="mb-1 mt-4">
+    <label for="exampleFormControlInput1" class="form-label mb-1">Email address</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" [(ngModel)]="email"
+      placeholder="name@example.com">
+  </div>
+  <div class="mb-1 mt-2">
+
+    <label for="inputPassword5" class="form-label mb-1">Password</label>
+    <input type="password" id="inputPassword5" class="form-control" [(ngModel)]="password"
+      aria-describedby="passwordHelpBlock">
+  </div>
+  <div class="mb-1 mt-2">
+
+    <label for="inputPassword5" class="form-label mb-1">Confirm Password</label>
+    <input type="password" id="inputPassword5" class="form-control" [(ngModel)]="confirmPassword"
+      aria-describedby="passwordHelpBlock">
+  </div>
+  <div class="mx-auto mt-3 d-flex">
+    <span>
+
+      <button class="btn btn-primary mx-auto">Sign Up</button>
+    </span>
+
+    <p class="mt-1 mx-4">Or</p>
+    <h6 class="mt-2" style="text-decoration: underline;cursor:pointer">Log In</h6>
+  </div>
+</div>
