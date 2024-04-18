@@ -1,1 +1,42 @@
-<p>admin-dashboard works!</p>
+<div class="card m-auto mt-3 w-50 shadow border border-0 p-3">
+  <div class="d-flex flex-row justify-content-between">
+
+    <h2>Add Movie </h2>
+    <h2 class="text-primary">Movie Dekho</h2>
+  </div>
+  <div class="mb-1 mt-4">
+    <label for="exampleFormControlInput1" class="form-label mb-1">Movie Title</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)] = "title"  placeholder="">
+  </div>
+  <div class="mb-1 mt-2">
+
+    <label for="inputPassword5" class="form-label mb-1">Actor</label>
+    <input type="text" id="inputPassword5" class="form-control"  [(ngModel)] = "actor"  placeholder="">
+  </div>
+  <div class="mb-1 mt-2">
+
+    <label for="inputPassword5" class="form-label mb-1">Actress</label>
+    <input type="text" id="inputPassword5" class="form-control" [(ngModel)] = "actress"   placeholder="">
+  </div>
+  <div class="mb-1 mt-2">
+
+    <label for="inputPassword5" class="form-label mb-1">Writer</label>
+    <input type="text" id="inputPassword5" class="form-control"  [(ngModel)] = "writer"  placeholder="">
+  </div>
+  <div class="mb-1 mt-2">
+
+    <label for="inputPassword5" class="form-label mb-1">Director</label>
+    <input type="text" id="inputPassword5" class="form-control" [(ngModel)] = "director"   placeholder="">
+  </div>
+  <div class="mb-1 mt-2">
+
+    <label for="inputPassword5" class="form-label mb-1">Plot</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)] = "plot"  rows="4"></textarea>
+  </div>
+  <div class="mx-auto mt-3 d-flex">
+    <span>
+
+      <button class="btn btn-primary mx-auto">Add Movie</button>
+    </span>
+  </div>
+</div>
