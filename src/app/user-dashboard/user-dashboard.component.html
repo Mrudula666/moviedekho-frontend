@@ -1,1 +1,32 @@
-<p>user-dashboard works!</p>
+<div class="d-flex flex-wrap m-4">
+  <div class="card border border-0 shadow" *ngFor = "let data of dashboardData">
+    <img src="{{data.url}}"  (click)="getModalData(data)" data-bs-toggle="modal" style="cursor:pointer" data-bs-target="#exampleModal"/>
+    <!-- <h6 class="mt-2">Title:{{data.name}}</h6> -->
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Title: {{modelData.name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6>Actor:{{modelData?.cast?.actor}}</h6>
+        <h6>Actress:{{modelData?.cast?.actress}}</h6>
+        <h6>Writer:{{modelData?.cast?.writer}}</h6>
+        <h6>Director:{{modelData?.cast?.director}}</h6>
+        <p class="mb-0">Plot:</p>
+        <p class="mt-0">{{modelData?.cast?.plot}}</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
