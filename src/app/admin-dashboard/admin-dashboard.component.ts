@@ -11,11 +11,10 @@ import { FormsModule } from '@angular/forms';
 export class AdminDashboardComponent {
 
   title:any;
-  actor:any;
-  actress:any;
-  writer:any;
+  actors:any;
+  streamingLink:any;
+  posterLink:any;
   director:any;
   plot:any;
-
 
 }

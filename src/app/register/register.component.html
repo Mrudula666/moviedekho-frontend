@@ -120,93 +120,103 @@
 </style>
 
 
-<div class="body">
-<div class="display:flex justify-content:space-around align-items:center min-height:100vh">
-<div class="container">
-  <h4>Sign Up > Movie Dekho</h4>
-  <form action="login" method="post">
+<div class="body"> <!-- Outer body with gradient background -->
+  <div class="container"> <!-- Main form container -->
+    <h4>Sign Up &gt; Movie Dekho</h4>
+    <div class="display-flex justify-content-space-around align-items-center min-height-100vh"> <!-- Align and justify -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> <!-- Reactive form -->
+        <label>Email</label>
+        <div class="inputBox">
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+            required
+          />
+        </div>
 
-  <div class="inputBox">
-    
-    <input  type="email" name="username" required="required" />
-    <span>Email</span>
-    
-  </div>
+        <label>Username</label>
+        <div class="inputBox">
+          <input
+            type="text"
+            formControlName="username"
+            placeholder="Username"
+            required
+          />
+        </div>
+        <label>password</label>
+        <div class="inputBox">
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+            required
+            minlength="5"
+          /> <!-- Password field -->
+        </div>
+        <label>confirm password</label>
+        <div class="inputBox">
+          <input
+            type="password"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+            required
+            minlength="5"
+          /> <!-- Confirm Password -->
+        </div>
 
-  <div class="inputBox">
-    
-    <input
-      type="password"
-      name="password"
-      required="required"
-      minlength="5"
-      
-    />
-    <span>Password</span>
-    
-  </div>
+        <label>Sign Up As </label>
+        <div class="inputBox">
+          <select formControlName="roleName"> <!-- Role dropdown -->
+            <option value="ROLE_USER">ROLE_USER</option>
+            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+          </select>
+        </div>
 
-  <div class="inputBox">
-    
-    <input
-      type="password"
-      name="password"
-      required="required"
-      minlength="5"
-      
-    />
-    <span>Confirm Password</span>
-    
-  </div>
+        <label>Gender </label>
+        <div class="inputBox">
+          <select formControlName="Gender"> <!-- Role dropdown -->
+            <option value="Male">MALE</option>
+            <option value="Female">FEMALE</option>
+          </select>
+        </div>
 
-  <div class="inputBox">
-    <input type="submit" value=" Sign Up" />
+        <label>Date Of Birth</label>
+        <div class="inputBox">
+          <input type="date" formControlName="dateOfBirth" /> <!-- Date of birth -->
+        </div>
 
-    <!-- <p>Or</p>
+        <label>Mobile Number</label>
+        <div class="inputBox">
+          <input
+            type="text"
+            formControlName="mobileNumber"
+            placeholder="Mobile Number"
+          /> <!-- Mobile number -->
+        </div>
 
+        <label>Subscription Plan</label>
+        <div class="inputBox">
+          <select formControlName="subscriptionPlan">
+            <option value="PREMIUM">PREMIUM</option>
+            <option value="BASIC">BASIC</option>
+            <option value="NONE">NONE</option>
+          </select>
+        </div>
 
-    <h6>
-      SignUp
-    </h6> -->
-  </div>
+        <label>country</label>
+        <div class="inputBox">
+          <input
+            type="text"
+            formControlName="country"
+            placeholder="Country"
+          /> <!-- Country field -->
+        </div>
 
-</form>
-</div>
-</div>
-</div>
-
-
-
-<!-- <div class="card m-auto mt-5 w-50 shadow border border-0 p-3">
-  <div class="d-flex flex-row justify-content-between">
-
-    <h2>Sign Up </h2>
-    <h2 class="text-primary">Movie Dekho</h2>
-  </div>
-  <div class="mb-1 mt-4">
-    <label for="exampleFormControlInput1" class="form-label mb-1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" [(ngModel)]="email"
-      placeholder="name@example.com">
-  </div>
-  <div class="mb-1 mt-2">
-
-    <label for="inputPassword5" class="form-label mb-1">Password</label>
-    <input type="password" id="inputPassword5" class="form-control" [(ngModel)]="password"
-      aria-describedby="passwordHelpBlock">
-  </div>
-  <div class="mb-1 mt-2">
-
-    <label for="inputPassword5" class="form-label mb-1">Confirm Password</label>
-    <input type="password" id="inputPassword5" class="form-control" [(ngModel)]="confirmPassword"
-      aria-describedby="passwordHelpBlock">
-  </div>
-  <div class="mx-auto mt-3 d-flex">
-    <span>
-
-      <button class="btn btn-primary mx-auto">Sign Up</button>
-    </span>
-
-    <p class="mt-1 mx-4">Or</p>
-    <h6 class="mt-2" style="text-decoration: underline;cursor:pointer">Log In</h6>
-  </div>
-</div> -->
+        <div class="inputBox">
+          <input type="submit" value="Sign Up" [disabled]="!registerForm.valid" /> <!-- Submit button -->
+        </div>
+      </form>
+    </div>
+  </div> 
+</div> 

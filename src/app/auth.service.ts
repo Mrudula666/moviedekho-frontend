@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  private token: string = '';
 
-  login(email: string, password: string) {
-    return this.http.post('/api/user/authenticate', { email, password });
+  // Store the token
+  setToken(token: string): void {
+    this.token = token;
   }
 
-  register(user: any) {
-    return this.http.post('/api/user/register', user);
+  // Retrieve the token
+  getToken(): string {
+    return this.token;
   }
 }

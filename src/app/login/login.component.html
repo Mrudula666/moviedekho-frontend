@@ -124,67 +124,24 @@
 <div class="display:flex justify-content:space-around align-items:center min-height:100vh">
 <div class="container">
   <h4>Movie Dekho > Login</h4>
-  <form action="login" method="post">
-
+<!-- login.component.html -->
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <!-- Correct form group -->
   <div class="inputBox">
-    
-    <input  type="email" name="username" required="required" />
-    <span>Email</span>
-    
+    <input type="text" formControlName="username" placeholder="Username" /> <!-- Correct control name -->
+  </div>
+  <div class="inputBox">
+    <input type="password" formControlName="password" placeholder="Password" minlength="6" />
   </div>
 
   <div class="inputBox">
-    
-    <input
-      type="password"
-      name="password"
-      required="required"
-      minlength="5"
-      
-    />
-    <span>Password</span>
-    
+    <input type="submit" value="Login" [disabled]="!loginForm.valid" />
   </div>
 
-  <div class="inputBox">
-    <input type="submit" value=" Login" />
-
-    <!-- <p>Or</p>
-
-
-    <h6>
-      SignUp
-    </h6> -->
+  <div class="already"> 
+    Don't have an account?
+    <a href="/register">Register here</a> 
   </div>
-
 </form>
 </div>
 </div>
 </div>
-
-
-<!-- <div class="card m-auto mt-5 w-50 shadow border border-0 p-3">
-  <div class="d-flex flex-row justify-content-between">
-
-    <h2>Log In </h2>
-    <h2 class="text-primary">Movie Dekho</h2>
-  </div>
-  <div class="mb-1 mt-4">
-    <label for="exampleFormControlInput1" class="form-label mb-1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" [(ngModel)] = "email" placeholder="name@example.com">
-  </div>
-  <div class="mb-1 mt-2">
-
-    <label for="inputPassword5" class="form-label mb-1">Password</label>
-    <input type="password" id="inputPassword5" class="form-control"  [(ngModel)] = "password" aria-describedby="passwordHelpBlock">
-  </div>
-  <div class="mx-auto mt-3 d-flex">
-    <span>
-
-      <button class="btn btn-primary mx-auto">Log In </button>
-    </span>
-
-      <p class="mt-1 mx-4">Or</p>
-      <h6 class="mt-2" style="text-decoration: underline;cursor:pointer">Sign Up</h6>
-  </div>
-</div> -->

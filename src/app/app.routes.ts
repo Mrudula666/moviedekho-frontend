@@ -11,3 +11,4 @@ export const appRoutes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
+
