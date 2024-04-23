@@ -5,13 +5,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginResponse } from '../../models/LoginResponse.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { ApiService } from '../_services/api.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [HttpClientModule, ReactiveFormsModule, FormsModule], // Add HttpClientModule
+  imports: [HttpClientModule, ReactiveFormsModule, FormsModule, CommonModule],
   standalone: true,
 })
 export class LoginComponent {
@@ -20,7 +22,8 @@ export class LoginComponent {
   constructor(private router: Router, 
     private fb: FormBuilder, 
     private http: HttpClient,
-    private authService: AuthService) {
+    private authService: AuthService, 
+    private apiService: ApiService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]], 
       password: ['', [Validators.required, Validators.minLength(6)]], 
@@ -31,25 +34,25 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
 
-      this.http
-  .post<LoginResponse>('http://localhost:8081/api/auth/login', { userName: username, password })
-  .subscribe(
-    (response: LoginResponse) => { 
-      const token= response.token;
+      this.http.post(this.apiService.login(), { userName: username, password }).subscribe({
+        next:(res:any) =>{
+          const token= res.token;
       this.authService.setToken(token);
-      console.log('Login successful:', response);
-      if (response && Array.isArray(response.roleNames)) {
-        if (response.roleNames.includes('ROLE_USER')) { 
-          console.log('In Role_user ::: ', response.roleNames);
+      console.log('Login successful:', res);
+      sessionStorage.setItem('userLogin', 'true');
+      if (res && Array.isArray(res.roleNames)) {
+        if (res.roleNames.includes('ROLE_USER')) { 
+          console.log('In Role_user ::: ', res.roleNames);
           this.router.navigateByUrl('/user-dashboard');
-        } else if (response.roleNames.includes('ROLE_ADMIN')) {
+        } else if (res.roleNames.includes('ROLE_ADMIN')) {
           this.router.navigate(['/admin-dashboard']); 
         }
       }
-    },
-    (error) => console.error('Login failed:', error) 
-  );
-
+        },
+        error(err) {
+          console.error('Login failed:', err);
+        },
+      })
     }
   }
 }

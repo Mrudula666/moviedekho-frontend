@@ -13,6 +13,9 @@ export class AuthService {
 
   // Retrieve the token
   getToken(): string {
+    console.log(this.token);
     return this.token;
   }
+
+
 }

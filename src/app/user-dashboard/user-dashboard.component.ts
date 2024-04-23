@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Movie } from '../../models/movie.model';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
-import { MovieService } from '../services/movie.service';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { ApiService } from '../_services/api.service';
+import * as bootstrap from 'bootstrap';
+
 
 @Component({
   selector: 'app-user-dashboard',
@@ -14,8 +16,11 @@ import { MovieService } from '../services/movie.service';
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css'
 })
-export class UserDashboardComponent implements OnInit{
+export class UserDashboardComponent implements OnInit, AfterViewInit{
 [x: string]: any;
+
+movies: any[] = []; 
+selectedMovie: Movie | null = null; 
 
 dashboardData: any;
 filteredMovies: any;
@@ -26,13 +31,32 @@ searchActors: string = '';
 searchRating: number | null = null;
 searchYear: number | null = null;
 
-  constructor(private movieService: MovieService, private authService: AuthService) {}
+  constructor(private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
+  ngAfterViewInit(): void {
+    
+  }
+
 
   ngOnInit(): void {
     this.searchMovies();
+    this.getAllMovies();
+  }
+   token = this.authService.getToken();
+  getAllMovies(): any{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
+    this.http.get(this.apiService.getAllMovies(), {headers}).subscribe({
+      next:(res:any) =>{
+        console.log(res)
+        this.movies = res;  
+        
+      },
+      error(err) {
+        console.error("Error.....")
+      },
+    });
   }
 
-  searchMovies(): void {
+  searchMovies(): any {
     // Define query parameters
     const queryParams = {
       title: this.searchTitle,
@@ -42,18 +66,20 @@ searchYear: number | null = null;
       releaseYear: this.searchYear,
     };
 
-    // Sample token for authentication (replace with your logic)
-    const token = this.authService.getToken();
-
-     // Call searchMovies from MovieService
-     this.movieService.searchMovies(queryParams, token).subscribe((data) => {
-      this.dashboardData = data;
-      this.filteredMovies = data;
-    });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
+    this.http.get(this.apiService.searchMovies(queryParams), {headers}).subscribe({
+      next:(res:any) => {
+        console.log(res)
+        this.filteredMovies = res;
+      }
+    })
   }
 
   getModalData(data: Movie): void {
     this.modelData = data; 
   }
+ 
   }
+
+  
 

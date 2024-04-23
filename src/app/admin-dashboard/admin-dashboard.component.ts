@@ -17,4 +17,12 @@ export class AdminDashboardComponent {
   director:any;
   plot:any;
 
+  deleteMovie() {
+
+  }
+  movie: any;
+  addOrUpdateMovie() :any {
+    
+  }
+
 }
