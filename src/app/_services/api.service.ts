@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
+ 
   
 
    movieURL = "http://localhost:8082/api/movie";
@@ -36,6 +37,10 @@ export class ApiService {
       }
     }
     return queryStrings.join('&'); // Create query string from parameters
+  }
+
+  deleteMovie(title: string): any {
+    return (`${this.movieURL}/deleteMovieByTitle/title`)
   }
 }
 

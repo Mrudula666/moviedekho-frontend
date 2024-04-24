@@ -1,31 +1,36 @@
-<div class="container">
-    <div class="row">
-      <h2 class="text-center">Movie Collection</h2>
-      <div *ngIf="movies.length === 0" class="text-center">
-        <p>No movies found.</p>
-      </div>
-      <!-- Display movie details in a grid -->
-      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let movie of movies">
-        <div class="card mb-4">
-          <img
-            src="{{ movie.moviePoster }}"
-            class="card-img-top"
-            alt="{{ movie.title }} poster"
-          />
-          <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
-            <p class="card-text">
-              {{ movie.rating }}
-            </p>
-            <p class="card-text">
-                {{ movie.genre }}
-              </p>
-            <p class="card-text">
-              <small class="text-muted">Release date: {{ movie.yearOfRelease }}</small>
-            </p>
-          </div>
+<div class="container my-4">
+  <div class="row">
+    <h2 class="text-center movie-collection-header">Movie Collection</h2>
+    
+    <!-- No movies found message -->
+    <div *ngIf="movies.length === 0" class="col-12 text-center">
+      <p>No movies found.</p>
+    </div>
+
+    <!-- Display movie details in a grid -->
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let movie of movies">
+      <div class="card movie-card mb-4">
+        <img
+          src="{{ movie.moviePoster }}"
+          class="card-img-top"
+          alt="{{ movie.title }} poster"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.title }}</h5>
+          <p class="card-text">
+            Rating: {{ movie.rating }}
+          </p>
+          <p class="card-text">
+            Genre: {{ movie.genre }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">Release date: {{ movie.yearOfRelease }}</small>
+          </p>
+          <p class="card-text" href="streaminlink to watch movie">
+          <!--  <a href="{{movie.streamLink}}" Watch Movie: {{ movie.rating }} -->
+          </p>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

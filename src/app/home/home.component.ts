@@ -15,7 +15,6 @@ import { ApiService } from '../_services/api.service';
 export class HomeComponent {
 
   movies: any[] = []; 
-  //token = `eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtcnVkdWxhNjY4NiIsInJvbGVzIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzEzODUxNzc4LCJleHAiOjE3MTM4NjI1Nzh9.CA1M5NKG3hqM_-OHTfCu8C2BH2JUasSs6BXR13IKfikiEGPtuFEYHkkm8ekC-NUVpq04bL6417kyQvVm6gSUaQ`;
   
   userLoggedIn: boolean = false;
   constructor(private http: HttpClient, private apiService: ApiService) {}

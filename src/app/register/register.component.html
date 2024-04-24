@@ -1,222 +1,129 @@
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+<div class="body"> <!-- Main Container with background -->
+  <div class="container"> <!-- Form Container -->
+    <h4>Sign Up &gt; Movie Dekho</h4> <!-- Form Header -->
 
-  * {
-    font-family: "Poppins", sans-serif;
-  }
+    <!-- Form Section -->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- Email Field -->
+      <div class="inputBox">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+          required
+        />
+        <span *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">
+          Email is required
+        </span>
+        <span *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('email')">
+          Enter a valid email
+        </span>
+      </div>
 
-  .body {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 100vh;
-    /* background: linear-gradient(45deg, #fe0682,#0de4ef); */
-    /* background-color: #243341; */
+      <!-- Username Field -->
+      <div class="inputBox">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Choose a username"
+          required
+        />
+        <span *ngIf="registerForm.get('username').touched && registerForm.get('username').hasError('required')">
+          Username is required
+        </span>
+      </div>
 
-    background: #8E0E00; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #1F1C18, #8E0E00
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #1F1C18, #8E0E00
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      <!-- Password Fields -->
+      <div class="inputBox">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+          required
+          minlength="6"
+        />
+        <span *ngIf="registerForm.get('password').touched && registerForm.get('password').hasError('required')">
+          Password is required
+        </span>
+        <span *ngIf="registerForm.get('password').touched && registerForm.get('password').hasError('minlength')">
+          Password must be at least 6 characters
+        </span>
+      </div>
 
-  }
+      <div class="inputBox">
+        <label for="confirm-password">Confirm Password</label>
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm your password"
+          required
+          minlength="6"
+        />
+        <span *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').hasError('required')">
+          Confirm password is required
+        </span>
+        <span *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').hasError('minlength')">
+          Must be at least 6 characters
+        </span>
+      </div>
 
-  .container {
-    position: relative;
-    padding: 70px;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  }
+      <!-- Role Selection -->
+      <div class="inputBox">
+        <label for="role">Sign Up As</label>
+        <select formControlName="roleName">
+          <option value="ROLE_USER">User</option>
+          <option value="ROLE_ADMIN">Admin</option>
+        </select>
+      </div>
 
-  .container h4 {
-    color: #111;
-    margin-bottom: 65px;
-    line-height: 1em;
-    font-weight: 500;
-    padding-left: 10px;
-    border-left: 5px solid #e91e63;
-  }
+      <!-- Additional Information -->
+      <div class="inputBox">
+        <label for="gender">Gender</label>
+        <select formControlName="gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
 
-  .container .inputBox,.container .inputBox1  {
-    position: relative;
-    width: 300px;
-    height: 46px;
-    margin-bottom: 35px;
-  }
+      <div class="inputBox">
+        <label for="dob">Date of Birth</label>
+        <input type="date" formControlName="dateOfBirth" />
+      </div>
 
-  .container .inputBox:last-child {
-    margin-bottom: 0;
-  }
+      <div class="inputBox">
+        <label for="mobile">Mobile Number</label>
+        <input
+          type="text"
+          formControlName="mobileNumber"
+          placeholder="Enter your mobile number"
+        />
+      </div>
 
-  .container .inputBox input ,.container .inputBox1 input{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    border: 1px solid #111;
-    background: transparent;
-    padding: 10px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    outline: none;
-    font-size: 16px;
-    color: #111;
-    font-weight: 300;
-  }
+      <div class="inputBox">
+        <label for="country">Country</label>
+        <input
+          type="text"
+          formControlName="country"
+          placeholder="Your country"
+        />
+      </div>
 
-  .container .inputBox ::placeholder {
-    color: rgba(225, 225, 225, 0.5);
-  }
+      <div class="inputBox">
+        <label for="subscriptionPlan">Subscription Plan</label>
+        <select formControlName="subscriptionPlan">
+          <option value="PREMIUM">Premium</option>
+          <option value="BASIC">Basic</option>
+          <option value="NONE">None</option>
+        </select>
+      </div>
 
-  .container .inputBox span,.container .inputBox1 span {
-        position: absolute;
-        top: 1px;
-        left: 1px;
-        padding: 10px;
-        display: inline-block;
-        font-size: 16px;
-        color: #111;
-        font-weight: 300;
-        transition: 0.5s;
-        pointer-events: none;
-      }
-
-     
-      .container .inputBox input:valid~span {
-                position: translateX(-10px) translateY(-32px);
-                font-size: 15px;
-            }
-
-
-  .container .inputBox input[type="submit"] {
-    background: #2196f3;
-    color: #fff;
-    border: none;
-    max-width: 120px;
-    cursor: pointer;
-    font-weight: 500;
-    align-content: center;
-    margin-left: 85px;
-  }
-
-  .container .inputBox input[type="submit"]:hover {
-    background: #e91e63;
-  }
-  .container .inputBox span {
-                transform: translateX(-10px)translateY(-35px);
-                font-size: 15px;
-
-            }
-
-  .container .already {
-    align-content: center;
-    margin-left: 40px;
-  }
-</style>
-
-
-<div class="body"> <!-- Outer body with gradient background -->
-  <div class="container"> <!-- Main form container -->
-    <h4>Sign Up &gt; Movie Dekho</h4>
-    <div class="display-flex justify-content-space-around align-items-center min-height-100vh"> <!-- Align and justify -->
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> <!-- Reactive form -->
-        <label>Email</label>
-        <div class="inputBox">
-          <input
-            type="email"
-            formControlName="email"
-            placeholder="Email"
-            required
-          />
-        </div>
-
-        <label>Username</label>
-        <div class="inputBox">
-          <input
-            type="text"
-            formControlName="username"
-            placeholder="Username"
-            required
-          />
-        </div>
-        <label>password</label>
-        <div class="inputBox">
-          <input
-            type="password"
-            formControlName="password"
-            placeholder="Password"
-            required
-            minlength="5"
-          /> <!-- Password field -->
-        </div>
-        <label>confirm password</label>
-        <div class="inputBox">
-          <input
-            type="password"
-            formControlName="confirmPassword"
-            placeholder="Confirm Password"
-            required
-            minlength="5"
-          /> <!-- Confirm Password -->
-        </div>
-
-        <label>Sign Up As </label>
-        <div class="inputBox">
-          <select formControlName="roleName"> <!-- Role dropdown -->
-            <option value="ROLE_USER">ROLE_USER</option>
-            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
-          </select>
-        </div>
-
-        <label>Gender </label>
-        <div class="inputBox">
-          <select formControlName="Gender"> <!-- Role dropdown -->
-            <option value="Male">MALE</option>
-            <option value="Female">FEMALE</option>
-          </select>
-        </div>
-
-        <label>Date Of Birth</label>
-        <div class="inputBox">
-          <input type="date" formControlName="dateOfBirth" /> <!-- Date of birth -->
-        </div>
-
-        <label>Mobile Number</label>
-        <div class="inputBox">
-          <input
-            type="text"
-            formControlName="mobileNumber"
-            placeholder="Mobile Number"
-          /> <!-- Mobile number -->
-        </div>
-
-        <label>Subscription Plan</label>
-        <div class="inputBox">
-          <select formControlName="subscriptionPlan">
-            <option value="PREMIUM">PREMIUM</option>
-            <option value="BASIC">BASIC</option>
-            <option value="NONE">NONE</option>
-          </select>
-        </div>
-
-        <label>country</label>
-        <div class="inputBox">
-          <input
-            type="text"
-            formControlName="country"
-            placeholder="Country"
-          /> <!-- Country field -->
-        </div>
-
-        <div class="inputBox">
-          <input type="submit" value="Sign Up" [disabled]="!registerForm.valid" /> <!-- Submit button -->
-        </div>
-      </form>
-    </div>
-  </div> 
-</div> 
+      <!-- Submit Button -->
+      <div class="inputBox">
+        <input type="submit" value="Sign Up" [disabled]="!registerForm.valid" />
+      </div>
+    </form>
+  </div> <!-- End of Form Container -->
+</div> <!-- End of Main Container -->

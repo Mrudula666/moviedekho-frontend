@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoginResponse } from '../../models/LoginResponse.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ApiService } from '../_services/api.service';
 import { CommonModule } from '@angular/common';
+
 
 
 @Component({
@@ -26,7 +26,9 @@ export class LoginComponent {
     private apiService: ApiService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]], 
-      password: ['', [Validators.required, Validators.minLength(6)]], 
+      password: ['', [Validators.required,
+         Validators.minLength(6)]]
+         
     });
   }
 

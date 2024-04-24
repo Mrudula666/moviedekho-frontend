@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterResponse } from '../../models/RegisterResponse.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
@@ -37,7 +39,10 @@ export class RegisterComponent implements OnInit {
       gender: ['MALE', Validators.required],
       subscriptionPlan: ['', Validators.required],
       dateOfBirth: ['', Validators.required], 
-      mobileNumber: ['', Validators.required], 
+      mobileNumber: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{10}$/)], // Mobile number validation
+      ],
       country: ['', Validators.required], 
     });
   }

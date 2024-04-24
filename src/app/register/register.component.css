@@ -1,0 +1,60 @@
+/* Main Body Style */
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #1F1C18, #8E0E00);
+}
+
+/* Form Container Style */
+.container {
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Elements */
+.inputBox {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.inputBox input, 
+.inputBox select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.inputBox input:focus,
+.inputBox select:focus {
+  border-color: #e91e63;
+}
+
+.inputBox span {
+  font-size: 12px;
+  color: #e91e63;
+}
+
+input[type="submit"] {
+  background: #2196f3;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: #e91e63;
+}
+
+/* Form Labels */
+label {
+  font-weight: bold;
+  color: #333;
+}

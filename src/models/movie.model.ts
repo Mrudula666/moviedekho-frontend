@@ -1,9 +1,9 @@
 export interface Movie {
-    title: string;
-    actors: string[];
-    genre: string;
-    yearOfRelease: number;
-    rating: string;
-    streamLink: string;
-    moviePoster: string;
+    title: any;
+    actors: any;
+    genre: any;
+    yearOfRelease: any;
+    rating: any;
+    streamLink: any;
+    moviePoster: any;
   }

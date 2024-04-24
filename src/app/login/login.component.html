@@ -120,28 +120,36 @@
 </style>
 
 
-<div class="body">
-<div class="display:flex justify-content:space-around align-items:center min-height:100vh">
-<div class="container">
-  <h4>Movie Dekho > Login</h4>
-<!-- login.component.html -->
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <!-- Correct form group -->
-  <div class="inputBox">
-    <input type="text" formControlName="username" placeholder="Username" /> <!-- Correct control name -->
-  </div>
-  <div class="inputBox">
-    <input type="password" formControlName="password" placeholder="Password" minlength="6" />
-  </div>
+<div class="body"> <!-- Outer body with gradient background -->
+  <div class="container"> <!-- Main form container -->
+    <h4>Movie Dekho > Login</h4>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <!-- Correct form group -->
+      <div class="inputBox">
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Username"
+        />
+      </div>
+      <br/>
+      <br/>
+      <div class="inputBox">
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          minlength="5"
+        />
+      </div>
 
-  <div class="inputBox">
-    <input type="submit" value="Login" [disabled]="!loginForm.valid" />
-  </div>
+      <div class="inputBox">
+        <input type="submit" value="Login" [disabled]="!loginForm.valid" />
+      </div>
 
-  <div class="already"> 
-    Don't have an account?
-    <a href="/register">Register here</a> 
+      <div class="already">
+        Don't have an account? <a href="/register">Register here</a>
+      </div>
+    </form>
   </div>
-</form>
 </div>
-</div>
-</div>
+
