@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import { AddMovieFormComponent } from './add-movie-form/add-movie-form.component';
 import { UpdateMovieComponent } from './update-movie/update-movie.component';
+import { WatchMovieComponent } from './watch-movie/watch-movie.component';
 
 
 
@@ -18,6 +19,7 @@ export const appRoutes: Routes = [
   { path: 'user-dashboard', component: UserDashboardComponent },
   { path: 'add-movie-form', component: AddMovieFormComponent },
   { path: 'update-movie-form', component: UpdateMovieComponent},
+  { path: 'watch-movie', component: WatchMovieComponent},
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

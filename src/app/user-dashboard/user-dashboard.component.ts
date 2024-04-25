@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ApiService } from '../_services/api.service';
 import * as bootstrap from 'bootstrap';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,8 +31,11 @@ searchTitle: string = '';
 searchActors: string = '';
 searchRating: number | null = null;
 searchYear: number | null = null;
+movie: any;
+targetedMovie: any;
+errormsg: any;
 
-  constructor(private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
+  constructor(private route: Router,private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
   ngAfterViewInit(): void {
     
   }
@@ -77,6 +81,22 @@ searchYear: number | null = null;
 
   getModalData(data: Movie): void {
     this.modelData = data; 
+  }
+
+  playMovie(title: any) {
+    if (sessionStorage.getItem('userLogin')) {
+    
+      let a= this.movies.filter((data:any)=> {return data.title == title});
+      this.targetedMovie = a[0];
+      this.route.navigate(['watch-movie'], {
+        state: this.targetedMovie
+      });
+
+    } else{
+     //this.errormsg = 'you have to login';
+      this.route.navigate(['/login']);
+    }
+  
   }
  
   }

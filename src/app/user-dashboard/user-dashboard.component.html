@@ -1,220 +1,162 @@
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-  * {
+/* Font Styling */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap");
+* {
     font-family: "Poppins", sans-serif;
-  }
+}
 
-  .body {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+/* Body Styling with Gradient Background */
+.body {
+    background: linear-gradient(to right, #1F1C18, #8E0E00);
     min-height: 100vh;
-    /* background: linear-gradient(45deg, #fe0682,#0de4ef); */
-    /* background-color: #243341; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    background: #8E0E00; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #1F1C18, #8E0E00
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #1F1C18, #8E0E00
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* Container Styling */
+.container {
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
 
-  }
+/* Styling for Search Container */
+.search-container {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
 
-  .container {
-    position: relative;
-    padding: 70px;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  }
-
-  .container h4 {
-    color: #111;
-    margin-bottom: 65px;
-    line-height: 1em;
-    font-weight: 500;
-    padding-left: 10px;
-    border-left: 5px solid #e91e63;
-  }
-
-  .container .inputBox,.container .inputBox1  {
-    position: relative;
-    width: 300px;
-    height: 46px;
-    margin-bottom: 35px;
-  }
-
-  .container .inputBox:last-child {
-    margin-bottom: 0;
-  }
-
-  .container .inputBox input ,.container .inputBox1 input{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    border: 1px solid #111;
-    background: transparent;
+/* Styling for Form Controls */
+.form-control {
+    border-radius: 10px;
     padding: 10px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    outline: none;
-    font-size: 16px;
-    color: #111;
-    font-weight: 300;
-  }
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-  .container .inputBox ::placeholder {
-    color: rgba(225, 225, 225, 0.5);
-  }
+/* Styling for Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
 
-  .container .inputBox span,.container .inputBox1 span {
-        position: absolute;
-        top: 1px;
-        left: 1px;
-        padding: 10px;
-        display: inline-block;
-        font-size: 16px;
-        color: #111;
-        font-weight: 300;
-        transition: 0.5s;
-        pointer-events: none;
-      }
+/* Card Styling */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-     
-      .container .inputBox input:valid~span {
-                position: translateX(-10px) translateY(-32px);
-                font-size: 15px;
-            }
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
 
+/* Image Styling within Card */
+.card-img-top {
+    border-radius: 15px 15px 0 0;
+}
 
-  .container .inputBox input[type="submit"] {
-    background: #2196f3;
-    color: #fff;
-    border: none;
-    max-width: 120px;
-    cursor: pointer;
-    font-weight: 500;
-    align-content: center;
-    margin-left: 85px;
-  }
+/* Styling for Card Body */
+.card-body {
+    padding: 15px;
+    text-align: center;
+}
 
-  .container .inputBox input[type="submit"]:hover {
-    background: #e91e63;
-  }
-  .container .inputBox span {
-                transform: translateX(-10px)translateY(-35px);
-                font-size: 15px;
+/* Button Styling */
+.btn {
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
 
-            }
+.btn-outline-primary {
+    border-color: #007bff;
+}
 
-  .container .already {
-    align-content: center;
-    margin-left: 40px;
-  }
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
 </style>
-
- 
-<!-- Search Form -->
-<div class="container my-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card p-3">
-        <h3 class="card-title">Search Movies</h3>
-        <div class="row">
-          <div class="col-sm-6 col-md-4">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search by title"
-              [(ngModel)]="searchTitle"
-            />
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search by genre"
-              [(ngModel)]="searchGenre"
-            />
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search by actors"
-              [(ngModel)]="searchActors"
-            />
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-sm-6 col-md-4">
-            <input
-              type="number"
-              class="form-control"
-              placeholder="Minimum rating"
-              [(ngModel)]="searchRating"
-            />
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <input
-              type="number"
-              class="form-control"
-              placeholder="Year of release"
-              [(ngModel)]="searchYear"
-            />
-          </div>
-          <div class="col-sm-6 col-md-4 text-center">
-            <button
-              class="btn btn-outline-primary w-100"
-              (click)="searchMovies()">
-              Search
-            </button>
-          </div>
-        </div>
+<div class="container">
+  <!-- Search Form with Adjusted Styling -->
+  <div class="search-container card p-3">
+    <h3 class="card-title">Search Movies</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by title"
+          [(ngModel)]="searchTitle"
+        />
+      </div>
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by genre"
+          [(ngModel)]="searchGenre"
+        />
+      </div>
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by actors"
+          [(ngModel)]="searchActors"
+        />
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Minimum rating"
+          [(ngModel)]="searchRating"
+        />
+      </div>
+      <div class="col-md-4">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Year of release"
+          [(ngModel)]="searchYear"
+        />
+      </div>
+      <div class="col-md-4 text-center">
+        <button
+          class="btn btn-outline-primary w-100"
+          (click)="searchMovies()">
+          Search
+        </button>
       </div>
     </div>
   </div>
-</div>
 
-
-<!-- Bootstrap Modal -->
-
-
-<!-- Movie Collection -->
-<div class="container">
-  <div class="row">
-    <h2 class="text-center my-4">Movie Collection</h2>
-    <!-- No Movies Found Message -->
-    <div *ngIf="movies.length === 0" class="text-center">
-      <p>No movies found.</p>
-    </div>
-    <!-- Movie Grid -->
-    <div class="row justify-content-center">
-      <div
-        class="col-sm-6 col-md-4 col-lg-3"
-        *ngFor="let movie of movies"
-      >
-        <div class="card h-100">
-          <img
-            src="{{ movie.moviePoster }}"
-            class="card-img-top"
-            alt="{{ movie.title }} poster"
-          />
-          <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
-            <p class="card-text">Actors: {{ movie.actors }}</p>
-            <p class="card-text">{{ movie.genre }}</p>
-            <p class="card-text">
-              <small class="text-muted">Release date: {{ movie.yearOfRelease }}</small>
-            </p>
-          </div>
-        </div>
+  <!-- Dashboard Grid -->
+  <div class="dashboard-grid">
+    <div class="card" *ngFor="let movie of movies" (click)="playMovie(movie.title)">
+      <img
+        src="{{ movie.moviePoster }}"
+        class="card-img-top"
+        alt="{{ movie.title }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p>Rating: {{ movie.rating }}</p>
+        <p>Genre: {{ movie.genre }}</p>
+        <small class="text-muted">Release date: {{ movie.yearOfRelease }}</small>
       </div>
     </div>
   </div>

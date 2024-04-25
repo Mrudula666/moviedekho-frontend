@@ -1,19 +1,39 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Component, OnInit } from '@angular/core';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router'; 
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header-component',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './header-component.component.html',
   styleUrl: './header-component.component.css'
 })
-export class HeaderComponentComponent {
+export class HeaderComponentComponent implements OnInit{
 
-  constructor(private router: Router) {} // Inject Router
+  loggedIn: boolean = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if(sessionStorage.getItem('userLogin')){
+          this.loggedIn = true;
+        }
+      }
+ }
+);
+  } 
+  ngOnInit(): void {
+  }
   
-  navigateTo(path: string) {
-    
+
+  navigateTo(path: string) {  
     this.router.navigateByUrl(path);
   }
 
+  logout(){
+    sessionStorage.removeItem('userLogin');
+    this.loggedIn = false;
+    this.router.navigate(['/home']);
+  }
 }

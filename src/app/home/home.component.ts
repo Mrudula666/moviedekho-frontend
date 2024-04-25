@@ -3,6 +3,7 @@ import { NgFor } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ApiService } from '../_services/api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,26 +16,48 @@ import { ApiService } from '../_services/api.service';
 export class HomeComponent {
 
   movies: any[] = []; 
+  movie: any;
+  targetedMovie: any;
+  errormsg: any;
   
   userLoggedIn: boolean = false;
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private route:Router,private http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {
-   
-    sessionStorage.setItem('test','test');
+  
   
     //const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
     this.http.get(this.apiService.getAllMovies()).subscribe({
       next:(res:any) =>{
         console.log(res)
         this.movies = res;  
+        let a= this.movies.filter((data:any)=> {return data.title == 'Inception'});
+        console.log(a[0].streamLink);
       },
       error(err) {
         console.error("Error.....")
       },
     });
+    this.playMovie(this.movie.title);
    
   }
 
+   playMovie(title: any) {
+    if (sessionStorage.getItem('userLogin')) {
+    
+      let a= this.movies.filter((data:any)=> {return data.title == title});
+      this.targetedMovie = a[0];
+      this.route.navigate(['watch-movie'], {
+        state: this.targetedMovie
+      });
+
+    } else{
+     //this.errormsg = 'you have to login';
+      this.route.navigate(['/login']);
+    }
+  
+  }
 
 }
+
+
