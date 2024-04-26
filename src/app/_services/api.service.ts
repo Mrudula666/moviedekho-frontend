@@ -36,11 +36,15 @@ export class ApiService {
         queryStrings.push(`${key}=${encodeURIComponent(params[key])}`);
       }
     }
-    return queryStrings.join('&'); // Create query string from parameters
+    return queryStrings.join('&');
   }
 
   deleteMovie(title: string): any {
-    return (`${this.movieURL}/deleteMovieByTitle/title`)
+    return (`${this.movieURL}/deleteMovieByTitle/${title}`)
+  }
+
+  updateSubscribe(): any{
+    return (`${this.userURL}/updateUserDetails`);
   }
 }
 

@@ -1,9 +1,6 @@
 
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import * as bootstrap from 'bootstrap';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';

@@ -39,6 +39,7 @@ export class LoginComponent {
       this.http.post(this.apiService.login(), { userName: username, password }).subscribe({
         next:(res:any) =>{
           const token= res.token;
+          sessionStorage.setItem('userDetails', JSON.stringify(res));
       this.authService.setToken(token);
       console.log('Login successful:', res);
       sessionStorage.setItem('userLogin', 'true');

@@ -10,8 +10,7 @@ import { HeaderComponentComponent } from './header-component/header-component.co
 import { AddMovieFormComponent } from './add-movie-form/add-movie-form.component';
 import { UpdateMovieComponent } from './update-movie/update-movie.component';
 import { WatchMovieComponent } from './watch-movie/watch-movie.component';
-
-
+import {SubscribeComponent} from './subscribe/subscribe.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +21,7 @@ export const appRoutes: Routes = [
   { path: 'watch-movie', component: WatchMovieComponent},
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'subscribe', component: SubscribeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+declare var Razorpay:any;
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -53,10 +55,49 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value; 
       this.http
-        .post<RegisterResponse>('http://localhost:8081/api/auth/register', formData) 
+        .post('http://localhost:8081/api/auth/register', formData) 
         .subscribe(
-          (response: RegisterResponse) => {
+          (response: any) => {
             console.log('Registration successful:', response);
+            if(response.roleNames.includes('ROLE_USER')){
+              let subscriptionAmount = 0;
+              if (response.subscriptionPlan === "PREMIUM") {
+                subscriptionAmount = 100000; 
+              } else if (response.subscriptionPlan === "BASIC") {
+                subscriptionAmount = 50000; 
+              }
+                    const RozarpayOptions = {
+                      description: 'Movie Subscription',
+                      currency: 'INR',
+                      amount: subscriptionAmount,
+                      name: response.username,
+                      key: 'rzp_test_FyLWRs08iJjnh7',
+                      image: 'https://i.imgur.com/FApqk3D.jpeg',
+                      prefill: {
+                        name: response.username,
+                        email: response.email,
+                        phone: response.mobileNumber
+                      },
+                      theme: {
+                        color: '#6466e3'
+                      },
+                      modal: {
+                        ondismiss:  () => {
+                          console.log('dismissed')
+                        }
+                      }
+                    }
+                
+                    const successCallback = (paymentid: any) => {
+                      console.log(paymentid);
+                    }
+                
+                    const failureCallback = (e: any) => {
+                      console.log(e);
+                    }
+                
+                    Razorpay.open(RozarpayOptions,successCallback, failureCallback)
+                  }
             this.router.navigate(['/login']);
           },
           (error: any) => { 

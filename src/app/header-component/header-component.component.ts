@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponentComponent implements OnInit{
 
+
   loggedIn: boolean = false;
 
   constructor(private router: Router) {
@@ -26,10 +27,17 @@ export class HeaderComponentComponent implements OnInit{
   ngOnInit(): void {
   }
   
-
   navigateTo(path: string) {  
     this.router.navigateByUrl(path);
   }
+
+  validateSubscribe() {
+    if(sessionStorage.getItem('userLogin')){
+      this.navigateTo('/subscribe');
+    }else{
+      this.navigateTo('/login');
+    }
+    }
 
   logout(){
     sessionStorage.removeItem('userLogin');

@@ -30,6 +30,9 @@ searchRating: number | null = null;
 searchYear: number | null = null;
 movie: any;
 
+constructor(private router: Router,private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
+  token = this.authService.getToken();
+
 
   ngOnInit(): void {
     this.getAllMovies();
@@ -37,12 +40,11 @@ movie: any;
    this.deleteMovie(this.movie.title);
   }
 
-  constructor(private router: Router,private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
-  token = this.authService.getToken();
+  
 
   deleteMovie(title: any) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    this.http.delete(this.apiService.deleteMovie(title), {headers}).subscribe({
+    this.http.delete(this.apiService.deleteMovie(title), { headers }).subscribe({
       next:(res:any) => {
         console.log("Movie Deleted");
       }
@@ -70,7 +72,8 @@ movie: any;
 
  
 
-    updateMovieDetails(movie: Movie): void {
+    updateMovieDetails(movie: any): void {
+      
       this.router.navigate(['/update-movie-form'], {
         queryParams: {
           title: movie.title,

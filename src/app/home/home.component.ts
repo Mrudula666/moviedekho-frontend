@@ -44,13 +44,16 @@ export class HomeComponent {
 
    playMovie(title: any) {
     if (sessionStorage.getItem('userLogin')) {
+
+      const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
     
-      let a= this.movies.filter((data:any)=> {return data.title == title});
+      if(userDetails.roleNames.includes("ROLE_USER")){
+        let a= this.movies.filter((data:any)=> {return data.title == title});
       this.targetedMovie = a[0];
       this.route.navigate(['watch-movie'], {
         state: this.targetedMovie
       });
-
+      }
     } else{
      //this.errormsg = 'you have to login';
       this.route.navigate(['/login']);
