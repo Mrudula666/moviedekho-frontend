@@ -116,3 +116,39 @@
     align-content: center;
     margin-left: 40px;
   }
+
+  .has-error input {
+    border: 2px solid red;
+    /* Other styling */
+  }
+
+  /* Error message styling */
+.error-message {
+  color: red; /* Red color for errors */
+  font-size: 0.8rem; /* Smaller font size for error text */
+  margin-top: 5px; /* Space above the error message */
+}
+
+/* Adjust the position of the error messages if needed */
+.container .inputBox .error-message {
+  position: absolute;
+  bottom: -20px; /* Position below the input field */
+  left: 0;
+  width: 100%;
+}
+
+/* Style the input field when error is present */
+.has-error input {
+  border: 2px solid red; /* Highlight input border in red */
+  /* Other styling if needed */
+}
+
+/* If using a class toggle approach */
+.has-error .error-message {
+  visibility: visible; /* Only show when there is an error */
+}
+
+/* If not using a class toggle approach, hide the error message when input is valid */
+.inputBox input:valid + .error-message {
+  display: none; /* Hide the message when input is valid */
+}

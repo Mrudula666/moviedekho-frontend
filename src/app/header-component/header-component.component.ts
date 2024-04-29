@@ -18,15 +18,16 @@ export class HeaderComponentComponent implements OnInit{
   constructor(private router: Router,  private tokenService: TokenService) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        this.tokenService.logoutIfTokenExpired();
         if(sessionStorage.getItem('userLogin')){
           this.loggedIn = true;
+         
         }
       }
  }
 );
   } 
   ngOnInit(): void {
+    this.tokenService.logoutIfTokenExpired();
   }
   
   navigateTo(path: string) {  

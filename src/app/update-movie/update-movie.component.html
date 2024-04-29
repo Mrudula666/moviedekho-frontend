@@ -74,6 +74,13 @@
             /> 
           </div>
           
+          <label>Upload Movie File (MP4)</label>
+          <div class="inputBox">
+            <input type="file" 
+            (change)="onFileChange($event)" 
+            accept=".mp4"
+            required />
+          </div>
 
           <div class="inputBox">
             <input type="submit" value="Update Movie" [disabled]="!updateMovieForm.valid" />

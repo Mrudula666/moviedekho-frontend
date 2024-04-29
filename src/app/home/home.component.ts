@@ -31,8 +31,6 @@ export class HomeComponent {
       next:(res:any) =>{
         console.log(res)
         this.movies = res;  
-        let a= this.movies.filter((data:any)=> {return data.title == 'Inception'});
-        console.log(a[0].streamLink);
       },
       error(err) {
         console.error("Error.....")

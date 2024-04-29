@@ -53,3 +53,138 @@
 .movie-card .card-text small {
   color: #888;
 }
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #121212; /* Dark background for the whole page */
+  color: #ffffff; /* Light text for better visibility on dark background */
+  font-family: 'Poppins', sans-serif; /* Keep the font consistent */
+}
+
+
+.container {
+  padding: 20px;
+  background-color: rgba(232, 222, 222, 0.995);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.search-container {
+  padding: 15px;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Styling for Form Controls */
+.form-control {
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card Styling */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styling within Card */
+.card-img-top {
+  border-radius: 15px 15px 0 0;
+}
+
+/* Styling for Card Body */
+.card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+/* Button Styling */
+.btn {
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+}
+
+
+/* Existing styles... */
+
+/* New Home Styling */
+.home {
+  background: #121212; /* Dark background for the whole home container */
+  min-height: 100vh; /* Make sure it covers the full height of the viewport */
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in the width and height */
+}
+
+/* Modify Container Styling for Dark Theme */
+.container {
+  /* Remove the background-color: white; to inherit the dark theme */
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Modify Search Container Styling for Dark Theme */
+.search-container {
+  background-color: #f2eded; /* Darker shade for the search container */
+  color: #fff; /* Light text color for readability */
+  /* ... other styles remain the same */
+}
+
+/* Modify Form Controls Styling for Dark Theme */
+.form-control {
+  background-color: #f3efef; /* Darker background for inputs */
+  color: #fff; /* Light text color for inputs */
+  
+}
+
+/* Modify Card Styling for Dark Theme */
+.card {
+  background-color: #2a2a2a; /* Darker background for cards */
+  color: #fff; /* Light text color for card content */
+  
+}
+
+/* Modify Button Styling for Dark Theme */
+.btn {
+  color: #fff; /* Light text color for buttons */
+  
+}
+
+/* Ensure that text within the card remains readable */
+.card-title,
+.card-text,
+.text-muted {
+  color: #fff; /* Light text color for visibility on dark background */
+}
+
+/* Update hover effect for buttons to fit the dark theme */
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #121212; /* Dark text color for contrast on light background */
+}

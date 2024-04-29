@@ -33,20 +33,32 @@ export class RegisterComponent implements OnInit {
     private http: HttpClient // Inject HttpClient
   ) { 
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]], // Email validation
-      username: ['', Validators.required], 
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(5)]],
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]], // Alphanumeric usernames
+      password: ['', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.pattern('(?=.*[A-Z])(?=.*[!@#$&*]).+')
+      ]],
+      confirmPassword: ['', [Validators.required]],
       roleName: ['ROLE_USER', Validators.required], 
       gender: ['MALE', Validators.required],
       subscriptionPlan: ['', Validators.required],
       dateOfBirth: ['', Validators.required], 
       mobileNumber: [
         '',
-        [Validators.required, Validators.pattern(/^\d{10}$/)], // Mobile number validation
+        [Validators.required, Validators.pattern('^[0-9]{10}$')] // Assuming a 10-digit mobile number
       ],
       country: ['', Validators.required], 
+    }, { 
+      validators: this.passwordMatchValidator // Custom validator for password matching
     });
+    
+  }
+
+  private passwordMatchValidator(formGroup: FormGroup): { [key: string]: any } | null {
+    return formGroup.get('password')?.value === formGroup.get('confirmPassword')?.value 
+      ? null : { 'mismatch': true };
   }
 
   ngOnInit() {}

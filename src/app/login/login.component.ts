@@ -25,11 +25,12 @@ export class LoginComponent {
     private authService: AuthService, 
     private apiService: ApiService) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]], 
-      password: ['', [Validators.required,
-         Validators.minLength(6)]]
-         
-    });
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]], // Alphanumeric usernames without special characters
+      password: ['', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.pattern('(?=.*[A-Z])(?=.*[!@#$&*]).+') // At least one uppercase and one symbol
+      ]]});
   }
 
   onSubmit() {

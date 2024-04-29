@@ -71,15 +71,16 @@ export class SubscribeComponent implements OnInit{
     const formData = this.userForm.value;
     console.log(formData);
     const body = formData;
+    const userDetails =  JSON.parse(sessionStorage.getItem('userDetails'));
     this.http.patch(this.apiService.updateSubscribe(),body).subscribe({
       next:(res:any) => {
         console.log("Updated Subscription", res);
 
         if(res.roleNames.includes(res.ROLE_USER)){
   let subscriptionAmount = 0;
-  if (res.subscriptionPlan === "PREMIUM") {
+  if (res.subscriptionPlan === "PREMIUM" && userDetails.subscriptionPlan != "PREMIUM") {
     subscriptionAmount = 100000; 
-  } else if (res.subscriptionPlan === "BASIC") {
+  } else if (res.subscriptionPlan === "BASIC" && userDetails.subscriptionPlan != "BASIC") {
     subscriptionAmount = 50000; 
   }
         const RozarpayOptions = {
@@ -87,7 +88,7 @@ export class SubscribeComponent implements OnInit{
           currency: 'INR',
           amount: subscriptionAmount,
           name: res.username,
-          key: 'rzp_test_FyLWRs08iJjnh7',
+          key: 'rzp_test_X0L2E3ySWHjzk6',
           image: 'https://i.imgur.com/FApqk3D.jpeg',
           prefill: {
             name: res.username,

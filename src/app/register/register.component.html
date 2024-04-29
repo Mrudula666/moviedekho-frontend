@@ -31,7 +31,7 @@
       </div>
 
       <!-- Password Fields -->
-      <div class="inputBox">
+      <div class="inputBox" [class.has-error]="registerForm.get('password').invalid && registerForm.get('password').touched">
         <label for="password">Password <span class="required">*</span></label>
         <input
           type="password"
@@ -41,6 +41,20 @@
           aria-label="Password"
         />
       </div>
+      
+      <div *ngIf="registerForm.get('password').touched">
+        <div *ngIf="registerForm.get('password').errors['required']">
+          Password is required.
+        </div>
+        <div *ngIf="registerForm.get('password').errors['minlength']">
+          Password must be at least 5 characters.
+        </div>
+        <div *ngIf="registerForm.get('password').errors['pattern']">
+          Password must include at least one uppercase letter and one symbol.
+        </div>
+      </div>
+      
+      
 
       <div class="inputBox">
         <label for="confirm-password">Confirm Password <span class="required">*</span></label>

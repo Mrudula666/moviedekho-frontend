@@ -1,6 +1,6 @@
 <!--@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");-->
-<div class="body"> <!-- Outer body with gradient background -->
-  <div class="container"> <!-- Main form container -->
+<div class="body"> 
+  <div class="container"> 
     <h4>Movie Dekho > Login</h4>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <!-- Correct form group -->
       <div class="inputBox">
@@ -12,13 +12,27 @@
       </div>
       <br/>
       <br/>
-      <div class="inputBox">
+      <div class="inputBox" [class.has-error]="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
         <input
           type="password"
           formControlName="password"
           placeholder="Password"
           minlength="5"
+          required
         />
+        
+        <!-- Include error messages here -->
+        <div *ngIf="loginForm.controls['password'].touched">
+          <div *ngIf="loginForm.controls['password'].errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="loginForm.controls['password'].errors?.['minlength']">
+            Password must be at least 5 characters long.
+          </div>
+          <div *ngIf="loginForm.controls['password'].errors?.['pattern']">
+            Password must contain at least one uppercase letter and one symbol.
+          </div>
+        </div>
       </div>
 
       <div class="inputBox">

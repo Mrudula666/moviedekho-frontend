@@ -71,7 +71,7 @@ constructor( private router:Router,
         formData.append("rating", this.addMovieForm.rating);
         formData.append("streamLink", this.addMovieForm.streamLink);
         formData.append("moviePoster", this.addMovieForm.moviePoster);
-        formData.append("videoFile", this.selectedFile); // The uploaded file
+        formData.append("videoFile", this.selectedFile);
 
        // const formData = this.addMovieForm.value; 
 

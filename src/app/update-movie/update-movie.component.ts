@@ -28,6 +28,7 @@ export class UpdateMovieComponent implements OnInit{
   movie: any;
   updateMovieForm: any;
   queryParams:any;
+  selectedFile: File | null = null;
 
 constructor( private router:Router,
   private fb: FormBuilder,
@@ -43,6 +44,7 @@ constructor( private router:Router,
     genre: ['', Validators.required],
     streamLink: ['', Validators.required],
     moviePoster: ['', Validators.required],
+    videoFile: [null],
   });
 }
 
@@ -54,8 +56,19 @@ token = this.authService.getToken();
 onSubmit() {
 
   if (this.updateMovieForm.valid) {
+    const formData = new FormData();
+    const yearOfRelease =  parseInt(this.updateMovieForm.value.yearOfRelease, 10)
+
+    formData.append("title", this.updateMovieForm.title);
+    formData.append("actors",  this.updateMovieForm.actors);
+    formData.append("genre", this.updateMovieForm.genre);
+    formData.append("yearOfRelease", yearOfRelease.toString());
+    formData.append("rating", this.updateMovieForm.rating);
+    formData.append("streamLink", this.updateMovieForm.streamLink);
+    formData.append("moviePoster", this.updateMovieForm.moviePoster);
+    formData.append("videoFile", this.selectedFile);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
-    const formData = this.updateMovieForm.value; 
+    
     this.http
       .put<MovieResponse>('http://localhost:8082/api/movie/updateMovieDetails', formData) 
       .subscribe(
@@ -73,5 +86,11 @@ onSubmit() {
   
   }
 
+  onFileChange(event: any) {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      this.selectedFile = files[0]; 
+    }
+  }
 
 }
