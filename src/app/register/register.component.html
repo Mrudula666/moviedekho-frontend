@@ -1,73 +1,56 @@
-<div class="body"> <!-- Main Container with background -->
-  <div class="container"> <!-- Form Container -->
-    <h4>Sign Up &gt; Movie Dekho</h4> <!-- Form Header -->
+<!-- Main Container -->
+<div class="body">
+  <div class="container form-container">
+    <h4>Sign Up &gt; Movie Dekho</h4>
 
-    <!-- Form Section -->
+    <!-- Sign-Up Form -->
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Email Field -->
       <div class="inputBox">
-        <label for="email">Email</label>
+        <label for="email">Email <span class="required">*</span></label>
         <input
           type="email"
           formControlName="email"
           placeholder="Enter your email"
           required
+          aria-label="Email"
+          aria-required="true"
         />
-        <span *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">
-          Email is required
-        </span>
-        <span *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('email')">
-          Enter a valid email
-        </span>
       </div>
 
       <!-- Username Field -->
       <div class="inputBox">
-        <label for="username">Username</label>
+        <label for="username">Username <span class="required">*</span></label>
         <input
           type="text"
           formControlName="username"
           placeholder="Choose a username"
           required
+          aria-label="Username"
         />
-        <span *ngIf="registerForm.get('username').touched && registerForm.get('username').hasError('required')">
-          Username is required
-        </span>
       </div>
 
       <!-- Password Fields -->
       <div class="inputBox">
-        <label for="password">Password</label>
+        <label for="password">Password <span class="required">*</span></label>
         <input
           type="password"
           formControlName="password"
           placeholder="Enter your password"
           required
-          minlength="6"
+          aria-label="Password"
         />
-        <span *ngIf="registerForm.get('password').touched && registerForm.get('password').hasError('required')">
-          Password is required
-        </span>
-        <span *ngIf="registerForm.get('password').touched && registerForm.get('password').hasError('minlength')">
-          Password must be at least 6 characters
-        </span>
       </div>
 
       <div class="inputBox">
-        <label for="confirm-password">Confirm Password</label>
+        <label for="confirm-password">Confirm Password <span class="required">*</span></label>
         <input
           type="password"
           formControlName="confirmPassword"
           placeholder="Confirm your password"
           required
-          minlength="6"
+          aria-label="Confirm Password"
         />
-        <span *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').hasError('required')">
-          Confirm password is required
-        </span>
-        <span *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').hasError('minlength')">
-          Must be at least 6 characters
-        </span>
       </div>
 
       <!-- Role Selection -->
@@ -90,7 +73,11 @@
 
       <div class="inputBox">
         <label for="dob">Date of Birth</label>
-        <input type="date" formControlName="dateOfBirth" />
+        <input
+          type="date"
+          formControlName="dateOfBirth"
+          aria-label="Date of Birth"
+        />
       </div>
 
       <div class="inputBox">
@@ -99,6 +86,7 @@
           type="text"
           formControlName="mobileNumber"
           placeholder="Enter your mobile number"
+          aria-label="Mobile Number"
         />
       </div>
 
@@ -108,10 +96,12 @@
           type="text"
           formControlName="country"
           placeholder="Your country"
+          aria-label="Country"
         />
       </div>
 
-      <div class="inputBox">
+      <!-- Conditional Subscription Plan -->
+      <div *ngIf="registerForm.get('roleName').value !== 'ROLE_ADMIN'" class="inputBox">
         <label for="subscriptionPlan">Subscription Plan</label>
         <select formControlName="subscriptionPlan">
           <option value="PREMIUM">Premium</option>
@@ -120,9 +110,10 @@
         </select>
       </div>
 
+      <!-- Submit Button -->
       <div class="inputBox">
         <input type="submit" value="Sign Up" [disabled]="!registerForm.valid" />
       </div>
     </form>
-  </div> <!-- End of Form Container -->
-</div> <!-- End of Main Container -->
+  </div>
+</div>

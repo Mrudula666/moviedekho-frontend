@@ -2,59 +2,62 @@
 .body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(to right, #1F1C18, #8E0E00);
+  align-items: center; /* Center the form vertically and horizontally */
+  min-height: 100vh; /* Full viewport height */
+  background: linear-gradient(to right, #1F1C18, #8E0E00); /* Gradient background */
 }
 
-/* Form Container Style */
-.container {
-  padding: 30px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+/* Form Container Styling */
+.form-container {
+  padding: 40px; /* Consistent padding for spacing */
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 500px; /* Limit the container width */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 10px; /* Rounded corners for aesthetics */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-/* Form Elements */
+/* Input Box Styling */
 .inputBox {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Consistent spacing between input boxes */
 }
 
-.inputBox input, 
+.inputBox input,
 .inputBox select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
+  width: 100%; /* Full width for input boxes */
+  padding: 10px; /* Comfortable padding for input */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners for smoothness */
+  outline: none; /* No outline on focus */
 }
 
 .inputBox input:focus,
 .inputBox select:focus {
-  border-color: #e91e63;
+  border-color: #e91e63; /* Change border color on focus */
 }
 
-.inputBox span {
-  font-size: 12px;
-  color: #e91e63;
-}
-
+/* Submit Button Styling */
 input[type="submit"] {
-  background: #2196f3;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
+  background: #2196f3; /* Background color for the button */
+  color: white; /* Text color for the button */
+  padding: 10px 20px; /* Padding for the button */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
 input[type="submit"]:hover {
-  background: #e91e63;
+  background: #e91e63; /* Change background color on hover */
 }
 
 /* Form Labels */
 label {
-  font-weight: bold;
-  color: #333;
+  font-weight: bold; /* Bold font for labels */
+  color: #333; /* Darker color for visibility */
+}
+
+/* Required Field Indicator */
+.required {
+  color: red; /* Indicates required fields */
 }

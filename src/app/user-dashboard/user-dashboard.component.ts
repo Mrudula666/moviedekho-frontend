@@ -45,7 +45,7 @@ errormsg: any;
     this.searchMovies();
     this.getAllMovies();
   }
-   token = this.authService.getToken();
+   token = sessionStorage.getItem('token');
   getAllMovies(): any{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
     this.http.get(this.apiService.getAllMovies(), {headers}).subscribe({
@@ -74,7 +74,7 @@ errormsg: any;
     this.http.get(this.apiService.searchMovies(queryParams), {headers}).subscribe({
       next:(res:any) => {
         console.log(res)
-        this.filteredMovies = res;
+        this.movies = res; 
       }
     })
   }

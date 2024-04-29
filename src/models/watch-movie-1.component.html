@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Movie Dekho</title>
@@ -7,10 +7,9 @@
 </head>
 
 <body>
-<!-- Navigation -->
 <nav class="container-fluid">
     <ul>
-        <li><strong>{{ movieDetails.title }}</strong></li>
+        <li><strong>{{ movieDetails?.title }}</strong></li>
     </ul>
 </nav>
 
@@ -23,12 +22,16 @@
             </hgroup>
             <p>Enjoy streaming the latest movies with high quality and easy access.</p>
             <figure style="text-align: center;">
-                <!-- Embed video player -->
-                <video controls style="width: 100%; border-radius: 10px;">
-                    <source src="http://localhost:8082/api/movie/video/{{ movieDetails.videoFileId }}" type="video/mp4"> 
-                    Your browser does not support the video tag.
-                </video>
-                <figcaption>Stream Now</figcaption>
+               
+                <div style="position: relative; display: inline-block;">
+                    
+                    <img src="{{ movieDetails?.moviePoster }}" alt="Blank Screen" style="width: 100%; border-radius: 10px;">
+                   
+                    <a href="{{ movieDetails?.streamLink }}" target="_blank" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 50%;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/64/64595.png" alt="Play Button" style="width: 40px; height: 40px;">
+                    </a>
+                </div>
+                <figcaption><a href="{{ movieDetails?.streamLink }}" target="_blank">Stream Now</a></figcaption>
             </figure>
             <h3>High-Quality Streaming</h3>
             <p>Experience movies in high definition with no interruptions.</p>
@@ -38,9 +41,10 @@
     </div>
 </main>
 
-<!-- Footer -->
+
 <footer class="container">
     <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
 </footer>
 </body>
 </html>
+ -->

@@ -16,6 +16,11 @@ export class AuthService {
     console.log(this.token);
     return this.token;
   }
-
+  hasRole(role: string): boolean {
+    
+    const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
+    const userRoles = userDetails.roleNames;
+    return userRoles.includes(role);
+  }
 
 }

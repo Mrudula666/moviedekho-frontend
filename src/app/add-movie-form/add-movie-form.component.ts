@@ -27,6 +27,7 @@ export class AddMovieFormComponent  implements OnInit{
   
   movie: any;
   addMovieForm: any;
+  selectedFile: File | null = null;
 
 constructor( private router:Router,
   private fb: FormBuilder,
@@ -41,18 +42,42 @@ constructor( private router:Router,
     genre: ['', Validators.required],
     streamLink: ['', Validators.required],
     moviePoster: ['', Validators.required],
+    videoFile: [null],
   });
 }
   
   ngOnInit(): void {
    
   }
-    token = this.authService.getToken();
+    token = sessionStorage.getItem('token');
+
+    onFileChange(event: any) {
+      const files = event.target.files;
+      if (files && files.length > 0) {
+        this.selectedFile = files[0]; 
+      }
+    }
 
     onSubmit() {
-      if (this.addMovieForm.valid) {
+      if (this.addMovieForm.valid && this.selectedFile) {
+
+        const formData = new FormData();
+        const yearOfRelease =  parseInt(this.addMovieForm.value.yearOfRelease, 10)
+
+        formData.append("title", this.addMovieForm.title);
+        formData.append("actors",  this.addMovieForm.actors);
+        formData.append("genre", this.addMovieForm.genre);
+        formData.append("yearOfRelease", yearOfRelease.toString());
+        formData.append("rating", this.addMovieForm.rating);
+        formData.append("streamLink", this.addMovieForm.streamLink);
+        formData.append("moviePoster", this.addMovieForm.moviePoster);
+        formData.append("videoFile", this.selectedFile); // The uploaded file
+
+       // const formData = this.addMovieForm.value; 
+
+
         const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
-        const formData = this.addMovieForm.value; 
+       
         this.http
           .post<MovieResponse>('http://localhost:8082/api/movie/addMovieDetails', formData) 
           .subscribe(

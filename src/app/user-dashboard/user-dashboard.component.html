@@ -87,12 +87,12 @@
 }
 
 </style>
-<div class="container">
-  <!-- Search Form with Adjusted Styling -->
+<!-- Search Container -->
+<div class="container my-4" style="background: linear-gradient(to right, #ff7e5f, #feb47b); padding: 20px; border-radius: 10px;"> 
   <div class="search-container card p-3">
     <h3 class="card-title">Search Movies</h3>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <input
           type="text"
           class="form-control"
@@ -100,15 +100,7 @@
           [(ngModel)]="searchTitle"
         />
       </div>
-      <div class="col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by genre"
-          [(ngModel)]="searchGenre"
-        />
-      </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <input
           type="text"
           class="form-control"
@@ -118,15 +110,7 @@
       </div>
     </div>
     <div class="row mt-3">
-      <div class="col-md-4">
-        <input
-          type="number"
-          class="form-control"
-          placeholder="Minimum rating"
-          [(ngModel)]="searchRating"
-        />
-      </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <input
           type="number"
           class="form-control"
@@ -134,7 +118,7 @@
           [(ngModel)]="searchYear"
         />
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-md-6 text-center">
         <button
           class="btn btn-outline-primary w-100"
           (click)="searchMovies()">
@@ -146,7 +130,12 @@
 
   <!-- Dashboard Grid -->
   <div class="dashboard-grid">
-    <div class="card" *ngFor="let movie of movies" (click)="playMovie(movie.title)">
+    <!-- Display search results -->
+    <div
+      class="card"
+      *ngFor="let movie of movies"
+      (click)="playMovie(movie.title)"
+    >
       <img
         src="{{ movie.moviePoster }}"
         class="card-img-top"

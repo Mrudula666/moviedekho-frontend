@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-header-component',
@@ -14,9 +15,10 @@ export class HeaderComponentComponent implements OnInit{
 
   loggedIn: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,  private tokenService: TokenService) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
+        this.tokenService.logoutIfTokenExpired();
         if(sessionStorage.getItem('userLogin')){
           this.loggedIn = true;
         }

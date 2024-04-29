@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Movie } from '../../models/movie.model';
 import { ApiService } from '../_services/api.service';
-import * as bootstrap from 'bootstrap';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
@@ -30,13 +28,21 @@ searchRating: number | null = null;
 searchYear: number | null = null;
 movie: any;
 
-constructor(private router: Router,private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
-  token = this.authService.getToken();
+constructor(
+  private router: Router,
+  private http: HttpClient,
+  private apiService: ApiService, 
+  private authService: AuthService ) {}
+
+  token = sessionStorage.getItem('token');
 
 
   ngOnInit(): void {
+   
+    if(!sessionStorage.getItem('userLogin') && !this.authService.hasRole('ROLE_ADMIN')){
+      this.router.navigate(['/login']);
+    }
     this.getAllMovies();
-   //this.openAddMovieForm();
    this.deleteMovie(this.movie.title);
   }
 
@@ -45,11 +51,16 @@ constructor(private router: Router,private http: HttpClient,private apiService: 
   deleteMovie(title: any) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     this.http.delete(this.apiService.deleteMovie(title), { headers }).subscribe({
-      next:(res:any) => {
+      next: (res: any) => {
         console.log("Movie Deleted");
+  
+        this.router.navigate(['/admin-dashboard']);
+      //  this.modalService.open(this.successModal, { centered: true });
+      },
+      error: (err: any) => {
+        console.error("Error while deleting the movie.");
       }
-    })
-
+    });
   }
 
   

@@ -40,7 +40,8 @@ export class LoginComponent {
         next:(res:any) =>{
           const token= res.token;
           sessionStorage.setItem('userDetails', JSON.stringify(res));
-      this.authService.setToken(token);
+          sessionStorage.setItem('token', token);
+     
       console.log('Login successful:', res);
       sessionStorage.setItem('userLogin', 'true');
       if (res && Array.isArray(res.roleNames)) {
@@ -58,4 +59,5 @@ export class LoginComponent {
       })
     }
   }
+
 }
