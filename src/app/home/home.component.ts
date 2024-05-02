@@ -30,6 +30,7 @@ export class HomeComponent {
     this.http.get(this.apiService.getAllMovies()).subscribe({
       next:(res:any) =>{
         console.log(res)
+        sessionStorage.setItem('movies', JSON.stringify(res));
         this.movies = res;  
       },
       error(err) {

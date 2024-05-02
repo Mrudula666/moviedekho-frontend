@@ -42,7 +42,12 @@ export class LoginComponent {
 
 
   onSubmit(){
-    console.log(this.password.length > 4 ,"2", !this.password.includes(" ") ,"3", /\d/.test(this.password) ,"4",  this.password.toUpperCase() !== this.password ,"5",this.password.toLowerCase() !== this.password)
+    console.log(this.password.length > 4 ,
+      "2", !this.password.includes(" ") ,"3", 
+      /\d/.test(this.password) ,"4",  
+      this.password.toUpperCase() !== this.password ,"5",
+      this.password.toLowerCase() !== this.password)
+      
     if(this.userName == ""){
       this.userNameError = true;
     }

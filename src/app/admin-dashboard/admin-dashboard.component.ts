@@ -85,6 +85,7 @@ constructor(
 
     updateMovieDetails(movie: any): void {
       
+      sessionStorage.setItem("updateMovie",JSON.stringify(movie));
       this.router.navigate(['/update-movie-form'], {
         queryParams: {
           title: movie.title,

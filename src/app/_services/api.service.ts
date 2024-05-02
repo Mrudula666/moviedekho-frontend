@@ -23,6 +23,10 @@ export class ApiService {
     return (`${this.userURL}/login`);
   }
 
+  register(): any{
+    return (`${this.userURL}/register`)
+  }
+
   searchMovies(queryParams: { title: string;
      genre: string; actors: string; minRating: number; 
      releaseYear: number; }): any {

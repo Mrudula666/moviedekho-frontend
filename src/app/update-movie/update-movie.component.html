@@ -5,16 +5,6 @@
       <h4>Update Movie Details</h4>
       <div class="display-flex justify-content-space-around align-items-center min-height-100vh"> 
         <form [formGroup]="updateMovieForm" (ngSubmit)="onSubmit()"> 
-          <label>Movie Title</label>
-          <div class="inputBox">
-            <input
-              type="text"
-              formControlName="title"
-              placeholder="Movie Title"
-              required
-            />
-          </div>
-  
           <label>Actors</label>
           <div class="inputBox">
             <input

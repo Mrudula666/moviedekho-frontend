@@ -25,7 +25,8 @@ import { MovieResponse } from '../../models/MovieResponse.model';
 })
 export class UpdateMovieComponent implements OnInit{
 
-  movie: any;
+  movie: any  = JSON.parse(sessionStorage.getItem("updateMovie"));
+  title:any;
   updateMovieForm: any;
   queryParams:any;
   selectedFile: File | null = null;
@@ -36,41 +37,60 @@ constructor( private router:Router,
   private route:Router,
   private authService: AuthService
 ) { 
+  console.log(this.movie);
   this.updateMovieForm = this.fb.group({
-    title: ['', Validators.required],
-    actors: ['', Validators.required],
-    yearOfRelease: ['', Validators.required],
-    rating:['',Validators.required],
-    genre: ['', Validators.required],
-    streamLink: ['', Validators.required],
-    moviePoster: ['', Validators.required],
+    title: [this.movie.title],
+    actors: [this.movie.actors],
+    yearOfRelease: [this.movie.yearOfRelease],
+    rating:[this.movie.rating],
+    genre: [this.movie.genre],
+    streamLink: [this.movie.streamLink],
+    moviePoster: [this.movie.moviePoster],
     videoFile: [null],
   });
 }
 
 ngOnInit(): void {
+
+
+  this.updateMovieForm = this.fb.group({
+    
+    title: [this.movie.title],
+    actors: [this.movie.actors],
+    yearOfRelease: [this.movie.yearOfRelease],
+    rating:[this.movie.rating],
+    genre: [this.movie.genre],
+    streamLink: [this.movie.streamLink],
+    moviePoster: [this.movie.moviePoster],
+    videoFile: [null],
+    
+  });
   
 }
+
 token = this.authService.getToken();
 
 onSubmit() {
+
+  console.log(this.updateMovieForm)
 
   if (this.updateMovieForm.valid) {
     const formData = new FormData();
     const yearOfRelease =  parseInt(this.updateMovieForm.value.yearOfRelease, 10)
 
-    formData.append("title", this.updateMovieForm.title);
-    formData.append("actors",  this.updateMovieForm.actors);
-    formData.append("genre", this.updateMovieForm.genre);
+    formData.append("title", this.updateMovieForm.value.title);
+    formData.append("actors",  this.updateMovieForm.value.actors);
+    formData.append("genre", this.updateMovieForm.value.genre);
     formData.append("yearOfRelease", yearOfRelease.toString());
-    formData.append("rating", this.updateMovieForm.rating);
-    formData.append("streamLink", this.updateMovieForm.streamLink);
-    formData.append("moviePoster", this.updateMovieForm.moviePoster);
+    formData.append("rating", this.updateMovieForm.value.rating);
+    formData.append("streamLink", this.updateMovieForm.value.streamLink);
+    formData.append("moviePoster", this.updateMovieForm.value.moviePoster);
     formData.append("videoFile", this.selectedFile);
+
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
     
     this.http
-      .put<MovieResponse>('http://localhost:8082/api/movie/updateMovieDetails', formData) 
+      .patch<MovieResponse>('http://localhost:8082/api/movie/updateMovieDetails', formData) 
       .subscribe(
         (response: any) => {
           console.log('Update successful:', response);

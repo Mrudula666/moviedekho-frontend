@@ -3,131 +3,137 @@
   <div class="container form-container">
     <h4>Sign Up &gt; Movie Dekho</h4>
 
-    <!-- Sign-Up Form -->
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <!-- Email Field -->
-      <div class="inputBox">
+      <div class="">
         <label for="email">Email <span class="required">*</span></label>
         <input
           type="email"
-          formControlName="email"
           placeholder="Enter your email"
-          required
-          aria-label="Email"
-          aria-required="true"
+          [(ngModel)] = "email"
+          class="form-control"
         />
+        <div class="text-danger">
+          <div *ngIf = "emailError" >
+            Email Required
+          </div>
+        </div>
       </div>
 
       <!-- Username Field -->
-      <div class="inputBox">
+      <div class="">
         <label for="username">Username <span class="required">*</span></label>
         <input
           type="text"
-          formControlName="username"
-          placeholder="Choose a username"
-          required
-          aria-label="Username"
+          placeholder="Enter a username"
+          [(ngModel)] = "username"
+          class="form-control"
         />
+        <div class="text-danger">
+          <div *ngIf = "userNameError" >
+            Username is required
+          </div>
+        </div>
       </div>
 
       <!-- Password Fields -->
-      <div class="inputBox" [class.has-error]="registerForm.get('password').invalid && registerForm.get('password').touched">
+      <div class="">
         <label for="password">Password <span class="required">*</span></label>
         <input
           type="password"
-          formControlName="password"
-          placeholder="Enter your password"
-          required
-          aria-label="Password"
+          placeholder="Enter password"
+          [(ngModel)] = "password"
+          #pwd
+          class="form-control"
+          
         />
-      </div>
-      
-      <div *ngIf="registerForm.get('password').touched">
-        <div *ngIf="registerForm.get('password').errors['required']">
-          Password is required.
-        </div>
-        <div *ngIf="registerForm.get('password').errors['minlength']">
-          Password must be at least 5 characters.
-        </div>
-        <div *ngIf="registerForm.get('password').errors['pattern']">
-          Password must include at least one uppercase letter and one symbol.
+        <div class="text-danger">
+          <div *ngIf = "passwordError" >
+            password is required
+          </div>
+          <div *ngIf = "passwordPatternError" >
+            Password must contain at least one number, one uppercase and a
+            lowercase letter and at least 8 characters<br />Password cannot
+            contain whitespace
+          </div>
         </div>
       </div>
       
-      
-
-      <div class="inputBox">
-        <label for="confirm-password">Confirm Password <span class="required">*</span></label>
+      <div class="">
+        <label for="confirmpassword">Confirm Password <span class="required">*</span></label>
         <input
           type="password"
-          formControlName="confirmPassword"
           placeholder="Confirm your password"
-          required
-          aria-label="Confirm Password"
+          [(ngModel)] = "confirmpassword"
+          #pwd
+          class="form-control"
         />
+
+        <div class="text-danger">
+          <div *ngIf = "confirmPasswordError" >
+            Confirm Password Should match with Password field
+          </div>
+        </div>
       </div>
 
       <!-- Role Selection -->
-      <div class="inputBox">
-        <label for="role">Sign Up As</label>
-        <select formControlName="roleName">
+      <div class="">
+        <label for="roleName">Sign Up As</label>
+        <select class="form-control"  [(ngModel)] = "roleName">
           <option value="ROLE_USER">User</option>
           <option value="ROLE_ADMIN">Admin</option>
         </select>
       </div>
 
       <!-- Additional Information -->
-      <div class="inputBox">
-        <label for="gender">Gender</label>
-        <select formControlName="gender">
+      <div class="">
+        <label for="gender" >Gender</label>
+        <select class="form-control" [(ngModel)] = "gender">
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
       </div>
 
-      <div class="inputBox">
-        <label for="dob">Date of Birth</label>
+      <div class="">
+        <label for="dateOfBirth">Date of Birth</label>
         <input
           type="date"
-          formControlName="dateOfBirth"
-          aria-label="Date of Birth"
+          placeholder="dateOfBirth"
+          class="form-control" 
+          [(ngModel)] = "dateOfBirth"
         />
       </div>
 
-      <div class="inputBox">
-        <label for="mobile">Mobile Number</label>
+      <div class="">
+        <label for="mobileNumber">Mobile Number <span class="required">*</span></label>
         <input
           type="text"
-          formControlName="mobileNumber"
           placeholder="Enter your mobile number"
-          aria-label="Mobile Number"
+          class="form-control" 
+          [(ngModel)]= "mobileNumber"
         />
       </div>
 
-      <div class="inputBox">
+      <div class="">
         <label for="country">Country</label>
         <input
           type="text"
-          formControlName="country"
           placeholder="Your country"
-          aria-label="Country"
+          class="form-control" 
+          [(ngModel)]= "country"
         />
       </div>
 
       <!-- Conditional Subscription Plan -->
-      <div *ngIf="registerForm.get('roleName').value !== 'ROLE_ADMIN'" class="inputBox">
+     <!--  <div *ngIf="registerForm.get('roleName').value !== 'ROLE_ADMIN'" class="">
         <label for="subscriptionPlan">Subscription Plan</label>
-        <select formControlName="subscriptionPlan">
+        <select class="form-control" [(ngModel)] = "subscriptionPlan">
           <option value="PREMIUM">Premium</option>
           <option value="BASIC">Basic</option>
           <option value="NONE">None</option>
         </select>
-      </div>
+      </div> -->
 
-      <!-- Submit Button -->
-      <div class="inputBox">
-        <input type="submit" value="Sign Up" [disabled]="!registerForm.valid" />
+      <div class="my-3 justify-content-center mx-auto">
+        <button  class="btn btn-primary justify-content-center mx-auto" type="submit" (click)="onSubmit()" >Sign-Up</button>
       </div>
-    </form>
   </div>
 </div>

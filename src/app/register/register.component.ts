@@ -8,6 +8,8 @@ import { RegisterResponse } from '../../models/RegisterResponse.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../_services/api.service';
+import { error } from 'console';
 
 declare var Razorpay:any;
 
@@ -25,12 +27,14 @@ declare var Razorpay:any;
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   registerForm: FormGroup; // Reactive form group
+
 
   constructor( private router:Router,
     private fb: FormBuilder,
-    private http: HttpClient // Inject HttpClient
+    private http: HttpClient,
+    private apiService: ApiService
   ) { 
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -41,83 +45,131 @@ export class RegisterComponent implements OnInit {
         Validators.pattern('(?=.*[A-Z])(?=.*[!@#$&*]).+')
       ]],
       confirmPassword: ['', [Validators.required]],
-      roleName: ['ROLE_USER', Validators.required], 
-      gender: ['MALE', Validators.required],
-      subscriptionPlan: ['', Validators.required],
+      roleName: ['ROLE_USER'], 
+      gender: ['MALE'],
+      subscriptionPlan: ['NONE'],
       dateOfBirth: ['', Validators.required], 
       mobileNumber: [
         '',
         [Validators.required, Validators.pattern('^[0-9]{10}$')] // Assuming a 10-digit mobile number
       ],
       country: ['', Validators.required], 
-    }, { 
-      validators: this.passwordMatchValidator // Custom validator for password matching
-    });
+    })
     
   }
 
-  private passwordMatchValidator(formGroup: FormGroup): { [key: string]: any } | null {
-    return formGroup.get('password')?.value === formGroup.get('confirmPassword')?.value 
-      ? null : { 'mismatch': true };
-  }
-
-  ngOnInit() {}
+  email: any = "";
+  username:string = "";
+  password:any = "";
+  confirmpassword:any = "";
+  roleName: any ="USER";
+  gender: any ="MALE";
+  dateOfBirth: any ="";
+  mobileNumber: any = "";
+  country: any = "";
+  subscriptionPlan: any = "NONE";
+  emailError:boolean = false;
+  userNameError:boolean = false;
+  passwordError:boolean = false;
+  passwordPatternError:boolean = false;
+  confirmPasswordError:boolean = false;
 
   onSubmit() {
-    if (this.registerForm.valid) {
-      const formData = this.registerForm.value; 
-      this.http
-        .post('http://localhost:8081/api/auth/register', formData) 
-        .subscribe(
-          (response: any) => {
-            console.log('Registration successful:', response);
-            if(response.roleNames.includes('ROLE_USER')){
-              let subscriptionAmount = 0;
-              if (response.subscriptionPlan === "PREMIUM") {
-                subscriptionAmount = 100000; 
-              } else if (response.subscriptionPlan === "BASIC") {
-                subscriptionAmount = 50000; 
-              }
-                    const RozarpayOptions = {
-                      description: 'Movie Subscription',
-                      currency: 'INR',
-                      amount: subscriptionAmount,
-                      name: response.username,
-                      key: 'rzp_test_FyLWRs08iJjnh7',
-                      image: 'https://i.imgur.com/FApqk3D.jpeg',
-                      prefill: {
-                        name: response.username,
-                        email: response.email,
-                        phone: response.mobileNumber
-                      },
-                      theme: {
-                        color: '#6466e3'
-                      },
-                      modal: {
-                        ondismiss:  () => {
-                          console.log('dismissed')
-                        }
-                      }
-                    }
-                
-                    const successCallback = (paymentid: any) => {
-                      console.log(paymentid);
-                    }
-                
-                    const failureCallback = (e: any) => {
-                      console.log(e);
-                    }
-                
-                    Razorpay.open(RozarpayOptions,successCallback, failureCallback)
-                  }
-            this.router.navigate(['/login']);
-          },
-          (error: any) => { 
-            console.error('Registration failed:', error); 
-          }
-        );
-    } else {
-      console.error('Form is not valid'); 
+
+    console.log(this.password.length > 4 ,
+      "2", !this.password.includes(" ") ,"3", 
+      /\d/.test(this.password) ,"4",  
+      this.password.toUpperCase() !== this.password ,"5",
+      this.password.toLowerCase() !== this.password)
+
+      
+    if(this.username == ""){
+      this.userNameError = true;
     }
+    if(this.password.length == 0){
+      this.passwordError = true;
+    }
+    if(this.password.length <= 4 || this.password.includes(" ") ||! /\d/.test(this.password) ||  this.password.toUpperCase() == this.password || this.password.toLowerCase() == this.password){
+      this.passwordPatternError = true;
+    }
+    if(this.confirmpassword !== this.password){
+      this.confirmPasswordError = true;
+    }
+
+    if(!this.userNameError && !this.passwordError && !this.passwordPatternError && !this.confirmPasswordError){
+
+      const formData = this.registerForm.value; 
+      this.userNameError = false;
+      this.passwordError = false;
+      this.passwordPatternError = false;
+      this.confirmPasswordError = false;
+      const password = this.password
+/* 
+      if(this.subscriptionPlan !== "NONE" && this.roleName.includes('ROLE_USER')){
+        if(this.roleName.includes('ROLE_USER')){
+          let subscriptionAmount = 0;
+          if (this.subscriptionPlan === "PREMIUM") {
+            subscriptionAmount = 100000; 
+          } else if (this.subscriptionPlan === "BASIC") {
+            subscriptionAmount = 50000; 
+          }
+
+          const RozarpayOptions = {
+            description: 'Movie Subscription',
+            currency: 'INR',
+            amount: subscriptionAmount,
+            name: this.username,
+            key: 'rzp_test_FyLWRs08iJjnh7',
+            image: 'https://i.imgur.com/FApqk3D.jpeg',
+            prefill: {
+              name: this.username,
+              email: this.email,
+              phone: this.mobileNumber
+            },
+            theme: {
+              color: '#6466e3'
+            },
+            modal: {
+              ondismiss:  () => {
+                console.log('dismissed')
+              }
+            }
+          }
+          const successCallback = (paymentid: any) => {
+            console.log(paymentid);
+          }
+      
+          const failureCallback = (e: any) => {
+            console.log(e);
+          }
+      
+          Razorpay.open(RozarpayOptions,successCallback, failureCallback)
+        }
+        
+      } */
+
+      this.http.post(this.apiService.register(), { 
+        email: this.email, 
+        username: this.username, 
+        password, 
+        roleName: this.roleName,
+        gender: this.gender,
+        dateOfBirth: this.dateOfBirth,
+        mobileNumber: this.mobileNumber,
+        country: this.country,
+        subscriptionPlan:this.subscriptionPlan}).subscribe({
+          next:(res:any) => {
+            console.log('Registration successful:', res);
+            this.router.navigate(['/login']);
+
+          }, error(err){
+            console.log("Registration Failed")
+          }
+
+        })
+
+      
+    
   }
+}
 }
