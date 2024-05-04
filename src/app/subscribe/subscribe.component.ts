@@ -90,6 +90,8 @@ export class SubscribeComponent implements OnInit{
       this.http.patch(this.apiService.updateSubscribe(),body).subscribe({
         next:(res:any) => {
           console.log("Updated Subscription", res);
+          sessionStorage.setItem('userDetails', JSON.stringify(res))
+          this.user = res;
           this.router.navigate(['/user-dashboard'])
         }})
     }
@@ -103,6 +105,8 @@ export class SubscribeComponent implements OnInit{
       this.http.patch(this.apiService.updateSubscribe(),body).subscribe({
         next:(res:any) => {
           console.log("Updated Subscription", res);
+          sessionStorage.setItem('userDetails', JSON.stringify(res))
+          this.user = res;
           this.router.navigate(['/user-dashboard'])
         }})
     }
@@ -133,13 +137,18 @@ function makePayment(subscriptionAmount: number, body: any) {
     modal: {
       ondismiss:  () => {
         console.log('dismissed')
+      },
+      onsubmit: () =>{
+        console.log('Razor payment')
       }
     }
   }
 
   const successCallback = (paymentid: any) => {
     console.log(paymentid);
+    console.log('test')
   }
+
 
   const failureCallback = (e: any) => {
     console.log(e);

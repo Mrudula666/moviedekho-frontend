@@ -8,6 +8,7 @@
         <input
           type="email"
           id="email"
+          class="form-control"
           [(ngModel)] = "email"
         />
       </div>
@@ -20,6 +21,7 @@
         type="text"
         id="gender"
         [(ngModel)]= "gender"
+        class="form-control"
         [attr.disabled]="true"
         />
       </div>
@@ -29,6 +31,7 @@
         <input type="text" 
         id="dateOfBirth"
         [(ngModel)]= "dob" 
+        class="form-control"
         [attr.disabled]="true"/>
       </div>
 
@@ -37,6 +40,7 @@
         <input
           type="text"
           id="mobile"
+          class="form-control"
           [(ngModel)]= "mobile"
           placeholder="Enter your mobile number"
         />
@@ -47,6 +51,7 @@
         <input
           type="text"
           id="country"
+          class="form-control"
         [(ngModel)]= "country"
           placeholder="Your country"
         />
@@ -54,7 +59,8 @@
 
       <div class="">
         <label for="subscriptionPlan">Subscription Plan</label>
-        <select [(ngModel)]= "subscriptionPlan">
+        <select [(ngModel)]= "subscriptionPlan" 
+        class="form-control">
           <option value="PREMIUM">Premium</option>
           <option value="BASIC">Basic</option>
           <option value="NONE">None</option>
