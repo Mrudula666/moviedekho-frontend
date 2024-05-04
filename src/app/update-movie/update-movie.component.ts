@@ -34,7 +34,6 @@ export class UpdateMovieComponent implements OnInit{
 constructor( private router:Router,
   private fb: FormBuilder,
   private http: HttpClient,
-  private route:Router,
   private authService: AuthService
 ) { 
   console.log(this.movie);

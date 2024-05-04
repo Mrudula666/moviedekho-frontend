@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../_services/api.service';
+import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 declare var Razorpay:any;
@@ -28,98 +29,123 @@ declare var Razorpay:any;
 export class SubscribeComponent implements OnInit{
 
 
-  userForm: FormGroup;
   subscriptionTypes = ['NONE', 'BASIC', 'PREMIUM'];
   selectedSubscription = 'NONE';
-  user = JSON.parse(sessionStorage.getItem('userDetails'));
-  email: any = this.user.email;
-  dob:any = this.user.dob;
+  user: any;
+  email: any;
+  dob:any;
+  mobile:any;
+  gender: any;
+  country: any;
+  username: any;
+  subscriptionPlan: any;
+  alreadyPremiumMemberError: any;
+  alreadyBasicMemberError: any;
 
 
   constructor(
     private fb: FormBuilder,
-   // private paymentService: RazorPayServiceComponent, 
+    private router:Router, 
     private apiService: ApiService,
     private http:HttpClient
   ) {
-    this.userForm = this.fb.group({
-      email: [this.user.email],
-      mobile: [this.user.mobileNumber],
-      dob: [this.user.dateOfBirth],
-      gender: [this.user.gender],
-      country: [this.user.country],
-      username: [this.user.username],
-      subscriptionPlan: ['NONE'],
-    });
+     /* this.email = this.user.email;
+     this.dob = this.user.dob;
+     this.mobile = this.user.mobileNumber;
+     this.gender = this.user.gender;
+    this.country = this.user.country;
+  this.username = this.user.userName; */
   }
 
   ngOnInit(): void {
-
-    this.userForm = this.fb.group({
-      email: [this.user.email],
-      mobile: [this.user.mobileNumber],
-      dob: [this.user.dateOfBirth],
-      gender: [this.user.gender],
-      country: [this.user.country],
-      username: [this.user.username],
-      subscriptionPlan: ['NONE'],
-    });
+    this.user = JSON.parse(sessionStorage.getItem('userDetails'));
+    console.log(this.user);
+    this.email = this.user.email;
+    this.dob = this.user.dateOfBirth;
+    this.mobile = this.user.mobileNumber;
+    this.gender = this.user.gender;
+   this.country = this.user.country;
     
   }
 
   onUpdateSubscription() {
-    const formData = this.userForm.value;
-    console.log(formData);
-    const body = formData;
-    const userDetails =  JSON.parse(sessionStorage.getItem('userDetails'));
-    this.http.patch(this.apiService.updateSubscribe(),body).subscribe({
-      next:(res:any) => {
-        console.log("Updated Subscription", res);
+    //const formData = this.userForm.value;
+    
+    const body = {email: this.email, 
+    username: this.user.username, 
+    roleNames: this.user.roleNames,
+    gender: this.gender,
+    country: this.country,
+    mobileNumber: this.user.mobileNumber,
+    subscriptionPlan:this.subscriptionPlan};   
 
-        if(res.roleNames.includes(res.ROLE_USER)){
-  let subscriptionAmount = 0;
-  if (res.subscriptionPlan === "PREMIUM" && userDetails.subscriptionPlan != "PREMIUM") {
-    subscriptionAmount = 100000; 
-  } else if (res.subscriptionPlan === "BASIC" && userDetails.subscriptionPlan != "BASIC") {
-    subscriptionAmount = 50000; 
-  }
-        const RozarpayOptions = {
-          description: 'Movie Subscription',
-          currency: 'INR',
-          amount: subscriptionAmount,
-          name: res.username,
-          key: 'rzp_test_X0L2E3ySWHjzk6',
-          image: 'https://i.imgur.com/FApqk3D.jpeg',
-          prefill: {
-            name: res.username,
-            email: res.email,
-            phone: res.mobileNumber
-          },
-          theme: {
-            color: '#6466e3'
-          },
-          modal: {
-            ondismiss:  () => {
-              console.log('dismissed')
-            }
-          }
-        }
+        if(body.roleNames.includes('ROLE_USER')){
+        let subscriptionAmount = 0;
+     if (body.subscriptionPlan === "PREMIUM" ) {
+    if(this.user.subscriptionPlan == "PREMIUM") {
+      this.alreadyPremiumMemberError = true;
+    }else{
+      subscriptionAmount = 100000;
+      makePayment(subscriptionAmount, body);
+      this.http.patch(this.apiService.updateSubscribe(),body).subscribe({
+        next:(res:any) => {
+          console.log("Updated Subscription", res);
+          this.router.navigate(['/user-dashboard'])
+        }})
+    }
+     
+  } else if (body.subscriptionPlan === "BASIC") {
+    if(this.user.subscriptionPlan == "BASIC"){
+      this.alreadyBasicMemberError = true;
+    }else{
+      subscriptionAmount = 50000; 
+      makePayment(subscriptionAmount, body);
+      this.http.patch(this.apiService.updateSubscribe(),body).subscribe({
+        next:(res:any) => {
+          console.log("Updated Subscription", res);
+          this.router.navigate(['/user-dashboard'])
+        }})
+    }
     
-        const successCallback = (paymentid: any) => {
-          console.log(paymentid);
-        }
-    
-        const failureCallback = (e: any) => {
-          console.log(e);
-        }
-    
-        Razorpay.open(RozarpayOptions,successCallback, failureCallback)
-      }
-
-      }})
-      
+  } 
     }
     
   }
   
-  
+}
+
+function makePayment(subscriptionAmount: number, body: any) {
+  const RozarpayOptions = {
+    description: 'Movie Subscription',
+    currency: 'INR',
+    amount: subscriptionAmount,
+    name: body.username,
+    key: 'rzp_test_X0L2E3ySWHjzk6',
+    image: 'https://i.imgur.com/FApqk3D.jpeg',
+    prefill: {
+      name: body.username,
+      email: body.email,
+      phone: body.mobileNumber
+    },
+    theme: {
+      color: '#6466e3'
+    },
+    modal: {
+      ondismiss:  () => {
+        console.log('dismissed')
+      }
+    }
+  }
+
+  const successCallback = (paymentid: any) => {
+    console.log(paymentid);
+  }
+
+  const failureCallback = (e: any) => {
+    console.log(e);
+  }
+
+  Razorpay.open(RozarpayOptions,successCallback, failureCallback)
+}
+
+

@@ -1,61 +1,92 @@
-/* Main Body Style */
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-container {
+  width: 100%; /* Full width of the container */
+  max-width: 600px; /* Maximum width is 600px */
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: white; /* White background */
+  border-radius: 10px; /* Rounded corners */
+}
+
 .body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(to right, #1F1C18, #8E0E00);
-  }
-  
-  /* Form Container Style */
-  .container {
-    padding: 30px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Form Elements */
-  .inputBox {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .inputBox input, 
-  .inputBox select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  .inputBox input:focus,
-  .inputBox select:focus {
-    border-color: #e91e63;
-  }
-  
-  .inputBox span {
-    font-size: 12px;
-    color: #e91e63;
-  }
-  
-  input[type="submit"] {
-    background: #2196f3;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-    background: #e91e63;
-  }
-  
-  /* Form Labels */
-  label {
-    font-weight: bold;
-    color: #333;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  background: linear-gradient(to right, #1F1C18, #8E0E00); /* Gradient background */
+}
+
+.container {
+  padding: 40px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
+}
+
+.inputBox {
+  position: relative;
+  margin-bottom: 25px; /* More space between inputs */
+}
+
+.inputBox input,
+.inputBox select {
+  width: 100%;
+  padding: 12px; /* More padding inside inputs */
+  border: 2px solid #ccc; /* Slightly thicker border */
+  border-radius: 8px; /* More rounded borders */
+  outline: none;
+  font-size: 16px; /* Larger font size for readability */
+}
+
+.inputBox input:focus,
+.inputBox select:focus {
+  border-color: #007BFF; /* Blue focus color */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25); /* Subtle focus shadow */
+}
+
+.inputBox span {
+  position: absolute;
+  left: 15px;
+  top: -10px;
+  background: #fff;
+  padding: 0 10px;
+  color: #666;
+  transition: all 0.3s;
+  font-size: 14px; /* Larger label font size */
+}
+
+.inputBox input:valid + span,
+.inputBox select:valid + span {
+  color: #4CAF50; /* Green for valid input confirmation */
+}
+
+input[type="submit"] {
+  background: #007BFF; /* Consistent blue background */
+  color: white;
+  padding: 12px 25px; /* More padding for better clickability */
+  border-radius: 8px; /* Rounded borders for buttons */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+input[type="submit"]:hover {
+  background: #0056b3; /* Darker blue on hover */
+}
+
+.has-error input,
+.has-error select {
+  border-color: red; /* Error indication */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  position: absolute;
+  bottom: -25px; /* Adjusted positioning for error message */
+  left: 0;
+  width: 100%;
+}

@@ -64,13 +64,13 @@ constructor( private router:Router,
         const formData = new FormData();
         const yearOfRelease =  parseInt(this.addMovieForm.value.yearOfRelease, 10)
 
-        formData.append("title", this.addMovieForm.title);
-        formData.append("actors",  this.addMovieForm.actors);
-        formData.append("genre", this.addMovieForm.genre);
+        formData.append("title", this.addMovieForm.value.title);
+        formData.append("actors",  this.addMovieForm.value.actors);
+        formData.append("genre", this.addMovieForm.value.genre);
         formData.append("yearOfRelease", yearOfRelease.toString());
-        formData.append("rating", this.addMovieForm.rating);
-        formData.append("streamLink", this.addMovieForm.streamLink);
-        formData.append("moviePoster", this.addMovieForm.moviePoster);
+        formData.append("rating", this.addMovieForm.value.rating);
+        formData.append("streamLink", this.addMovieForm.value.streamLink);
+        formData.append("moviePoster", this.addMovieForm.value.moviePoster);
         formData.append("videoFile", this.selectedFile);
 
        // const formData = this.addMovieForm.value; 
