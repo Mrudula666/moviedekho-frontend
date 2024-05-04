@@ -11,6 +11,7 @@ import { AddMovieFormComponent } from './add-movie-form/add-movie-form.component
 import { UpdateMovieComponent } from './update-movie/update-movie.component';
 import { WatchMovieComponent } from './watch-movie/watch-movie.component';
 import {SubscribeComponent} from './subscribe/subscribe.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ export const appRoutes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'home', component: HomeComponent },
   { path: 'subscribe', component: SubscribeComponent },
+  { path: 'updateProfile', component: UpdateProfileComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

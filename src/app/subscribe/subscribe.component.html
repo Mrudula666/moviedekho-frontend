@@ -10,6 +10,7 @@
           id="email"
           class="form-control"
           [(ngModel)] = "email"
+          disabled readonly
         />
       </div>
       
@@ -22,7 +23,7 @@
         id="gender"
         [(ngModel)]= "gender"
         class="form-control"
-        [attr.disabled]="true"
+        disabled readonly
         />
       </div>
 
@@ -32,7 +33,7 @@
         id="dateOfBirth"
         [(ngModel)]= "dob" 
         class="form-control"
-        [attr.disabled]="true"/>
+        disabled readonly/>
       </div>
 
       <div class="">
@@ -43,6 +44,7 @@
           class="form-control"
           [(ngModel)]= "mobile"
           placeholder="Enter your mobile number"
+          disabled readonly
         />
       </div>
 
@@ -54,6 +56,7 @@
           class="form-control"
         [(ngModel)]= "country"
           placeholder="Your country"
+          disabled readonly
         />
       </div>
 

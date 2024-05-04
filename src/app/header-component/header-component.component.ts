@@ -11,8 +11,6 @@ import { TokenService } from '../token.service';
   styleUrl: './header-component.component.css'
 })
 export class HeaderComponentComponent implements OnInit{
-
-
   loggedIn: boolean = false;
 
   constructor(private router: Router,  private tokenService: TokenService) {
@@ -41,6 +39,14 @@ export class HeaderComponentComponent implements OnInit{
       this.navigateTo('/login');
     }
     }
+
+    updateProfile() {
+      if(sessionStorage.getItem('userLogin')){
+        this.navigateTo('/updateProfile');
+      }else{
+        this.navigateTo('/login');
+      }
+      }
 
   logout(){
     sessionStorage.removeItem('userLogin');
