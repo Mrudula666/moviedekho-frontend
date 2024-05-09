@@ -4,14 +4,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
-import { RegisterResponse } from '../../models/RegisterResponse.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../_services/api.service';
-import { error } from 'console';
 
-declare var Razorpay:any;
 
 @Component({
   selector: 'app-register',
@@ -29,6 +26,7 @@ declare var Razorpay:any;
 })
 export class RegisterComponent {
   registerForm: FormGroup; // Reactive form group
+
 
 
   constructor( private router:Router,
@@ -73,8 +71,15 @@ export class RegisterComponent {
   passwordError:boolean = false;
   passwordPatternError:boolean = false;
   confirmPasswordError:boolean = false;
+  emailPatternError:boolean = false;
+  mobileNumberValidationError: boolean = false;
+  mobileNumberAlreadyTakenError: boolean = false;
+  userNameAlreadyTakenError: boolean = false;
+  emailAlreadyExistsError: boolean = false;
 
   onSubmit() {
+
+    this.resetErrorFlags();
 
     console.log(this.password.length > 4 ,
       "2", !this.password.includes(" ") ,"3", 
@@ -82,71 +87,41 @@ export class RegisterComponent {
       this.password.toUpperCase() !== this.password ,"5",
       this.password.toLowerCase() !== this.password)
 
+
       
     if(this.username == ""){
       this.userNameError = true;
+      this.router.navigate(['/register']);
     }
     if(this.password.length == 0){
       this.passwordError = true;
+      this.router.navigate(['/register']);
     }
     if(this.password.length <= 4 || this.password.includes(" ") ||! /\d/.test(this.password) ||  this.password.toUpperCase() == this.password || this.password.toLowerCase() == this.password){
       this.passwordPatternError = true;
+      this.router.navigate(['/register']);
     }
     if(this.confirmpassword !== this.password){
       this.confirmPasswordError = true;
+      this.router.navigate(['/register']);
     }
+
+    if(!this.email.includes('@')){
+      this.emailPatternError = true
+      this.router.navigate(['/register']);
+    }
+
+    if(this.mobileNumber.length <= 10){
+      this.mobileNumberValidationError = true
+      this.router.navigate(['/register']);
+    }
+
 
     if(!this.userNameError && !this.passwordError && !this.passwordPatternError && !this.confirmPasswordError){
 
       const formData = this.registerForm.value; 
-      this.userNameError = false;
-      this.passwordError = false;
-      this.passwordPatternError = false;
-      this.confirmPasswordError = false;
+      
       const password = this.password
-/* 
-      if(this.subscriptionPlan !== "NONE" && this.roleName.includes('ROLE_USER')){
-        if(this.roleName.includes('ROLE_USER')){
-          let subscriptionAmount = 0;
-          if (this.subscriptionPlan === "PREMIUM") {
-            subscriptionAmount = 100000; 
-          } else if (this.subscriptionPlan === "BASIC") {
-            subscriptionAmount = 50000; 
-          }
-
-          const RozarpayOptions = {
-            description: 'Movie Subscription',
-            currency: 'INR',
-            amount: subscriptionAmount,
-            name: this.username,
-            key: 'rzp_test_FyLWRs08iJjnh7',
-            image: 'https://i.imgur.com/FApqk3D.jpeg',
-            prefill: {
-              name: this.username,
-              email: this.email,
-              phone: this.mobileNumber
-            },
-            theme: {
-              color: '#6466e3'
-            },
-            modal: {
-              ondismiss:  () => {
-                console.log('dismissed')
-              }
-            }
-          }
-          const successCallback = (paymentid: any) => {
-            console.log(paymentid);
-          }
-      
-          const failureCallback = (e: any) => {
-            console.log(e);
-          }
-      
-          Razorpay.open(RozarpayOptions,successCallback, failureCallback)
-        }
-        
-      } */
 
       this.http.post(this.apiService.register(), { 
         email: this.email, 
@@ -163,13 +138,33 @@ export class RegisterComponent {
             this.router.navigate(['/login']);
 
           }, error(err){
-            console.log("Registration Failed")
+            
+            console.log('Hi this is Error')
+
+            if (err.error === "Email already in use") {
+              this.emailAlreadyExistsError = true;
+            } else if (err.error === "Username already taken") {
+              this.userNameAlreadyTakenError = true;
+            } else if (err.error === "Mobile number already in use") {
+              this.mobileNumberAlreadyTakenError = true;
+            } else {
+              console.error('Unexpected error:', err);
+            }
+
           }
 
-        })
-
-      
+        });
     
   }
 }
+  resetErrorFlags() {
+    this.userNameError = false;
+      this.passwordError = false;
+      this.passwordPatternError = false;
+      this.confirmPasswordError = false;
+      this.emailPatternError = false;
+      this.userNameAlreadyTakenError = false;
+      this.emailAlreadyExistsError  = false;
+      this.mobileNumberAlreadyTakenError = false;
+  }
 }

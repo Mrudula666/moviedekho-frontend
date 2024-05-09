@@ -1,4 +1,4 @@
-<!-- Main Container -->
+
 <div class="body">
   <div class="container form-container">
     <h4>Sign Up &gt; Movie Dekho</h4>
@@ -12,10 +12,11 @@
           class="form-control"
         />
         <div class="text-danger">
-          <div *ngIf = "emailError" >
-            Email Required
-          </div>
+          <div *ngIf= "emailError" >Email Required</div>
+          <div *ngIf= "emailPatternError"> Enter a Valid Email</div>
+          <div *ngIf= "emailAlreadyExistsError" >User Email already Exists With this Email</div>
         </div>
+
       </div>
 
       <!-- Username Field -->
@@ -30,6 +31,9 @@
         <div class="text-danger">
           <div *ngIf = "userNameError" >
             Username is required
+          </div>
+          <div *ngIf = "userNameAlreadyTakenError" >
+            Username Already Taken
           </div>
         </div>
       </div>
@@ -47,7 +51,7 @@
         />
         <div class="text-danger">
           <div *ngIf = "passwordError" >
-            password is required
+            Password is required
           </div>
           <div *ngIf = "passwordPatternError" >
             Password must contain at least one number, one uppercase and a
@@ -110,6 +114,14 @@
           class="form-control" 
           [(ngModel)]= "mobileNumber"
         />
+        <div class="text-danger">
+          <div *ngIf = "mobileNumberValidationError" >
+            Invalid Mobile Number
+          </div>
+          <div *ngIf = "mobileNumberAlreadyTakenError" >
+            Username Already Taken
+          </div>
+        </div>
       </div>
 
       <div class="">

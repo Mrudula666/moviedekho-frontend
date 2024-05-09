@@ -77,7 +77,7 @@ onSubmit() {
     const formData = new FormData();
     const yearOfRelease =  parseInt(this.updateMovieForm.value.yearOfRelease, 10)
 
-    formData.append("title", this.updateMovieForm.value.title);
+    formData.append("title", this.movie.title);
     formData.append("actors",  this.updateMovieForm.value.actors);
     formData.append("genre", this.updateMovieForm.value.genre);
     formData.append("yearOfRelease", yearOfRelease.toString());
