@@ -136,17 +136,15 @@ function makePayment(subscriptionAmount: number, body: any) {
     },
     modal: {
       ondismiss:  () => {
-        console.log('dismissed')
+        
       },
       onsubmit: () =>{
-        console.log('Razor payment')
       }
     }
   }
 
   const successCallback = (paymentid: any) => {
     console.log(paymentid);
-    console.log('test')
   }
 
 

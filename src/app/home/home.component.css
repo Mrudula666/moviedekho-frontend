@@ -9,16 +9,12 @@
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the grid layout */
 .row {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
 }
-
-/* Styling for individual movie cards */
-
 
 * {
     font-family: "Poppins", sans-serif;
@@ -29,29 +25,19 @@
     justify-content: space-around;
     align-items: center;
     min-height: 100vh;
-    /* background: linear-gradient(45deg, #fe0682,#0de4ef); */
-    /* background-color: #243341; */
-
-    background: #8E0E00; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #1F1C18, #8E0E00
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #1F1C18, #8E0E00
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background-color: revert-layer;
+    background: revert-layer;
+    
   }
 
   .container {
     position: relative;
     padding: 70px;
-    background: #fff;
+    background: url('/assets/background-image.webp') no-repeat center center; 
+    background-size: cover;
     border-radius: 20px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
   }
-
   .container h4 {
     color: #111;
     margin-bottom: 65px;
@@ -59,6 +45,10 @@
     font-weight: 500;
     padding-left: 10px;
     border-left: 5px solid #e91e63;
+    background: url('/assets/background-image.webp') no-repeat center center; 
+    background-size: cover;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
   }
 
   .container .inputBox,.container .inputBox1  {
@@ -136,7 +126,8 @@
     align-content: center;
     margin-left: 40px;
   }
-/* Styling for the Movie Collection header */
+
+  
 .movie-collection-header {
   font-size: 2rem;
   color: #2196f3;
@@ -147,7 +138,6 @@
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the grid layout */
 .row {
   display: flex;
   justify-content: center;
@@ -155,7 +145,6 @@
   flex-wrap: wrap;
 }
 
-/* Styling for individual movie cards */
 .movie-collection-header {
   font-size: 1.5rem;
   color: #2196f3;

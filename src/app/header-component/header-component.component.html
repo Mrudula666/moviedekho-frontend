@@ -16,7 +16,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- Navigation links -->
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" (click)="navigateTo('/home')">Home</a>
         </li>
@@ -27,12 +26,21 @@
           <a class="nav-link" routerLink="/register" (click)="navigateTo('/register')" *ngIf="!loggedIn">Sign Up</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  (click)="updateProfile()" >Update Profile</a>
+          <a class="nav-link"  (click)="updateProfile()">Update Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link"  (click)="validateSubscribe()">Subscribe</a>
         </li>
       </ul>
+      <div style="text-align: right;">
+        <button
+          class="btn btn-outline-danger btn-sm" 
+          *ngIf="loggedIn" 
+          (click)="Back()"
+          style="margin-left: 10px;" >
+          Back
+        </button>
+        </div>
       <div style="text-align: right;">
         <button
           class="btn btn-outline-danger btn-sm" 

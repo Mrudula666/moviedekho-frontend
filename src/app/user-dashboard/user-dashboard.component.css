@@ -1,4 +1,4 @@
-/* Styling for the Movie Collection header */
+
 .movie-collection-header {
   font-size: 2rem;
   color: #2196f3;
@@ -9,7 +9,6 @@
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the grid layout */
 .row {
   display: flex;
   justify-content: center;
@@ -58,18 +57,31 @@
   font-family: "Poppins", sans-serif;
 }
 
-body {
-  background: #121212; /* Dark background for the whole page */
-  color: #ffffff; /* Light text for better visibility on dark background */
-  font-family: 'Poppins', sans-serif; /* Keep the font consistent */
+.body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100vh;
+  background-color: revert-layer;
+  background: revert-layer;
+  background: -webkit-linear-gradient(
+    to right,
+    #0de4ef, #0de4ef
+  );
+  background: linear-gradient(
+    to right,
+    #0de4ef, #0de4ef
+  );
 }
 
 
 .container {
-  padding: 20px;
-  background-color: rgba(232, 222, 222, 0.995);
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 70px;
+  background: url('/assets/background-image.webp') no-repeat center center; 
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -136,7 +148,7 @@ body {
 
 /* New Home Styling */
 .home {
-  background: #121212; /* Dark background for the whole home container */
+  background: revert-layer;
   min-height: 100vh; /* Make sure it covers the full height of the viewport */
   padding: 20px;
   box-sizing: border-box; /* Include padding in the width and height */
@@ -187,4 +199,14 @@ body {
 .btn-outline-primary:hover {
   background-color: #007bff;
   color: #121212; /* Dark text color for contrast on light background */
+}
+.btn-favorite {
+  background: linear-gradient(45deg, #ff6b6b, #f94d6a);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
 }

@@ -16,7 +16,22 @@
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  
+  .container {
+    position: relative;
+    padding: 70px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    background: url('/assets/background-image.webp') no-repeat center center; 
+    background-size: cover;
+    border-radius: 20px;
+  }
+
+  .body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 100vh;
+    
+  }
   /* Styling for individual movie cards */
   .movie-card {
     border-radius: 10px;

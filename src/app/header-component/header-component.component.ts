@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../token.service';
+import { Location } from '@angular/common';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { ApiService } from '../_services/api.service';
 
 @Component({
   selector: 'app-header-component',
@@ -11,18 +14,23 @@ import { TokenService } from '../token.service';
   styleUrl: './header-component.component.css'
 })
 export class HeaderComponentComponent implements OnInit{
-  loggedIn: boolean = false;
 
-  constructor(private router: Router,  private tokenService: TokenService) {
+
+  loggedIn: boolean = false;
+   user: any;
+
+  constructor(private router: Router, private http: HttpClient, private apiService: ApiService,private tokenService: TokenService, private location: Location) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         if(sessionStorage.getItem('userLogin')){
-          this.loggedIn = true;
-         
+         this.loggedIn = true;
+         const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
+         this.user = userDetails.username;
         }
       }
  }
 );
+
   } 
   ngOnInit(): void {
     this.tokenService.logoutIfTokenExpired();
@@ -53,4 +61,10 @@ export class HeaderComponentComponent implements OnInit{
     this.loggedIn = false;
     this.router.navigate(['/home']);
   }
+  Back() {
+
+    this.location.back();
+    
+  }
+
 }

@@ -1,117 +1,96 @@
+* {
+  font-family: 'Poppins', sans-serif;
+}
 
-    * {
-      font-family: "Poppins", sans-serif;
-    }
+
+.form-container {
+  width: 100%; /* Use 100% of the container width */
+  max-width: 600px; /* Maximum width of the form */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: adds shadow for better focus */
+  background-color: white; /* Optional: changes background color */
+  border-radius: 8px; /* Optional: rounds corners */
+}
+
+.body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100vh;
+  background: url('/assets/background-image.webp') no-repeat center center; 
+  background-size: cover;
+  border-radius: 20px;
   
-    .body {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      min-height: 100vh;
-      /* background: linear-gradient(45deg, #fe0682,#0de4ef); */
-      /* background-color: #243341; */
-  
-      background: #8E0E00; /* fallback for old browsers */
-      background: -webkit-linear-gradient(
-        to right,
-        #1F1C18, #8E0E00
-      ); /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(
-        to right,
-        #1F1C18, #8E0E00
-      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-    }
-  
-    .container {
-      position: relative;
-      padding: 70px;
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    }
-  
-    .container h4 {
-      color: #111;
-      margin-bottom: 65px;
-      line-height: 1em;
-      font-weight: 500;
-      padding-left: 10px;
-      border-left: 5px solid #e91e63;
-    }
-  
-    .container .inputBox,.container .inputBox1  {
-      position: relative;
-      width: 300px;
-      height: 46px;
-      margin-bottom: 35px;
-    }
-  
-    .container .inputBox:last-child {
-      margin-bottom: 0;
-    }
-  
-    .container .inputBox input ,.container .inputBox1 input{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      border: 1px solid #111;
-      background: transparent;
-      padding: 10px;
-      border-radius: 4px;
-      box-sizing: border-box;
-      outline: none;
-      font-size: 16px;
-      color: #111;
-      font-weight: 300;
-    }
-  
-    .container .inputBox ::placeholder {
-      color: rgba(225, 225, 225, 0.5);
-    }
-  
-    .container .inputBox span,.container .inputBox1 span {
-          position: absolute;
-          top: 1px;
-          left: 1px;
-          padding: 10px;
-          display: inline-block;
-          font-size: 16px;
-          color: #111;
-          font-weight: 300;
-          transition: 0.5s;
-          pointer-events: none;
-        }
-  
-       
-        .container .inputBox input:valid~span {
-                  position: translateX(-10px) translateY(-32px);
-                  font-size: 15px;
-              }
-  
-  
-    .container .inputBox input[type="submit"] {
-      background: #2196f3;
-      color: #fff;
-      border: none;
-      max-width: 120px;
-      cursor: pointer;
-      font-weight: 500;
-      align-content: center;
-      margin-left: 85px;
-    }
-  
-    .container .inputBox input[type="submit"]:hover {
-      background: #e91e63;
-    }
-    .container .inputBox span {
-                  transform: translateX(-10px)translateY(-35px);
-                  font-size: 15px;
-  
-              }
-  
-    .container .already {
-      align-content: center;
-      margin-left: 40px;
-    }
+}
+
+
+.container {
+  position: relative;
+  padding: 70px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.inputBox {
+  position: relative;
+  margin-bottom: 25px; /* More space between inputs */
+}
+
+.inputBox input,
+.inputBox select {
+  width: 100%;
+  padding: 12px; /* More padding inside inputs */
+  border: 2px solid #ccc; /* Slightly thicker border */
+  border-radius: 8px; /* More rounded borders */
+  outline: none;
+  font-size: 16px; /* Larger font size for readability */
+}
+
+.inputBox input:focus,
+.inputBox select:focus {
+  border-color: #007BFF; /* Blue focus color */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25); /* Subtle focus shadow */
+}
+
+.inputBox span {
+  position: absolute;
+  left: 15px;
+  top: -10px;
+  background: #fff;
+  padding: 0 10px;
+  color: #666;
+  transition: all 0.3s;
+  font-size: 14px; /* Larger label font size */
+}
+
+.inputBox input:valid + span,
+.inputBox select:valid + span {
+  color: #4CAF50; /* Green for valid input confirmation */
+}
+
+input[type="submit"] {
+  background: #007BFF; /* Consistent blue background */
+  color: white;
+  padding: 12px 25px; /* More padding for better clickability */
+  border-radius: 8px; /* Rounded borders for buttons */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+input[type="submit"]:hover {
+  background: #0056b3; /* Darker blue on hover */
+}
+
+.has-error input,
+.has-error select {
+  border-color: red; /* Error indication */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  position: absolute;
+  bottom: -25px; /* Adjusted positioning for error message */
+  left: 0;
+  width: 100%;
+}

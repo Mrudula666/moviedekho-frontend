@@ -12,19 +12,22 @@
   border-radius: 8px; /* Optional: rounds corners */
 }
 
+
 .body {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  min-height: 100vh; /* Full viewport height */
-  background: linear-gradient(to right, #1F1C18, #8E0E00); /* Gradient background */
+  min-height: 100vh;
+  background: url('/assets/background-image.webp') no-repeat center center; 
+  background-size: cover;
+  border-radius: 20px;
+  
 }
 
 .container {
-  padding: 40px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  position: relative;
+  padding: 70px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 
 .inputBox {

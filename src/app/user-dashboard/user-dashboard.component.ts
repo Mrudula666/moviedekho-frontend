@@ -24,6 +24,8 @@ movies: any[] = [];
 selectedMovie: Movie | null = null; 
 
 dashboardData: any;
+username: any;
+title:any;
 filteredMovies: any;
 modelData: Movie | null = null;
 searchGenre: string = '';
@@ -33,7 +35,9 @@ searchRating: number | null = null;
 searchYear: number | null = null;
 movie: any;
 targetedMovie: any;
+favMovie: any;
 errormsg: any;
+isFavoriteMovies: boolean = true;
 
   constructor(private route: Router,private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
   ngAfterViewInit(): void {
@@ -46,6 +50,7 @@ errormsg: any;
     this.getAllMovies();
   }
    token = sessionStorage.getItem('token');
+   user = JSON.parse(sessionStorage.getItem('userDetails'));
   getAllMovies(): any{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`).set('Content-Type', 'application/json');
     this.http.get(this.apiService.getAllMovies(), {headers}).subscribe({
@@ -98,7 +103,33 @@ errormsg: any;
     }
   
   }
- 
+
+  addFavorite(title: any){
+  
+    this.http.post(this.apiService.addFavoriteMovie(), {username: this.user.username,
+      movieTitle: title}).subscribe({
+      next:(res:any) =>{
+        console.log(res)
+        sessionStorage.setItem('addFavorite', 'True');
+      },
+      error(err) {
+        console.error("Error.....")
+        
+      },
+    });
+
+  }
+
+  getUserFavMovies(){
+    this.http.get(this.apiService.getFavoriteMovies(this.user.username)).subscribe({
+      next:(res:any) => {
+        this.isFavoriteMovies = false;
+        console.log(res)
+        this.movies = res;
+      }
+    });
+
+}
   }
 
   

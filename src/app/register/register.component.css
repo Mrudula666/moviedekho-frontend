@@ -15,10 +15,12 @@
 
 .body {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #1F1C18, #8E0E00);
+
+  background: url('/assets/background-image.webp') no-repeat center center; 
+  background-size: cover;
 }
 
 .container {
