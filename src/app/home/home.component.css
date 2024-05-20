@@ -1,4 +1,3 @@
-
 .movie-collection-header {
   font-size: 2rem;
   color: #2196f3;
@@ -9,178 +8,42 @@
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
+.carousel-inner {
+  width: 100%;
+  overflow: hidden;
 }
 
-* {
-    font-family: "Poppins", sans-serif;
-  }
-
-  .body {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 100vh;
-    background-color: revert-layer;
-    background: revert-layer;
-    
-  }
-
-  .container {
-    position: relative;
-    padding: 70px;
-    background: url('/assets/background-image.webp') no-repeat center center; 
-    background-size: cover;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  }
-  .container h4 {
-    color: #111;
-    margin-bottom: 65px;
-    line-height: 1em;
-    font-weight: 500;
-    padding-left: 10px;
-    border-left: 5px solid #e91e63;
-    background: url('/assets/background-image.webp') no-repeat center center; 
-    background-size: cover;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  }
-
-  .container .inputBox,.container .inputBox1  {
-    position: relative;
-    width: 300px;
-    height: 46px;
-    margin-bottom: 35px;
-  }
-
-  .container .inputBox:last-child {
-    margin-bottom: 0;
-  }
-
-  .container .inputBox input ,.container .inputBox1 input{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    border: 1px solid #111;
-    background: transparent;
-    padding: 10px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    outline: none;
-    font-size: 16px;
-    color: #111;
-    font-weight: 300;
-  }
-
-  .container .inputBox ::placeholder {
-    color: rgba(225, 225, 225, 0.5);
-  }
-
-  .container .inputBox span,.container .inputBox1 span {
-        position: absolute;
-        top: 1px;
-        left: 1px;
-        padding: 10px;
-        display: inline-block;
-        font-size: 16px;
-        color: #111;
-        font-weight: 300;
-        transition: 0.5s;
-        pointer-events: none;
-      }
-
-     
-      .container .inputBox input:valid~span {
-                position: translateX(-10px) translateY(-32px);
-                font-size: 15px;
-            }
-
-
-  .container .inputBox input[type="submit"] {
-    background: #2196f3;
-    color: #fff;
-    border: none;
-    max-width: 120px;
-    cursor: pointer;
-    font-weight: 500;
-    align-content: center;
-    margin-left: 85px;
-  }
-
-  .container .inputBox input[type="submit"]:hover {
-    background: #e91e63;
-  }
-  .container .inputBox span {
-                transform: translateX(-10px)translateY(-35px);
-                font-size: 15px;
-
-            }
-
-  .container .already {
-    align-content: center;
-    margin-left: 40px;
-  }
-
-  
-.movie-collection-header {
-  font-size: 2rem;
-  color: #2196f3;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+.carousel-item {
+  transition: transform 0.5s ease;
 }
 
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.movie-collection-header {
-  font-size: 1.5rem;
-  color: #2196f3;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 10px; /* Optional: Adds spacing between items */
-}
-
-.movie-card {
+.carousel-item img {
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  max-height: 1000px;
+  object-fit: cover;
 }
 
-.movie-card img {
-  border-bottom: 1px solid #ddd;
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 8px;
 }
 
-.movie-card .card-title {
-  font-size: 1.2rem;
-  font-weight: 600;
+.body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100vh;
+  background-color: revert-layer;
+  background: revert-layer;
 }
 
-.movie-card .card-text {
-  font-size: 0.9rem;
-}
-
-
-.movie-card .card-text small {
-  color: #888;
+.container {
+  position: relative;
+  padding: 70px;
+  background: url('/assets/background-image.webp') no-repeat center center; 
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }

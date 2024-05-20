@@ -1,56 +1,39 @@
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <h1 class="navbar-brand text-primary">Movie Dekho</h1>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <a class="navbar-brand mx-auto" href="/home">Movie Dekho</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" (click)="navigateTo('/home')">Home</a>
+        <li class="nav-item" *ngIf="!loggedIn">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!loggedIn">
+          <a class="nav-link" href="/register">Sign Up</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login" (click)="navigateTo('/login')" *ngIf="!loggedIn">Login</a>
+          <a class="nav-link" (click)="updateProfile()">Update Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/register" (click)="navigateTo('/register')" *ngIf="!loggedIn">Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  (click)="updateProfile()">Update Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  (click)="validateSubscribe()">Subscribe</a>
+          <a class="nav-link" (click)="validateSubscribe()">Subscribe</a>
         </li>
       </ul>
-      <div style="text-align: right;">
+      <div class="d-flex">
         <button
-          class="btn btn-outline-danger btn-sm" 
+          class="btn btn-outline-danger btn-sm me-2" 
           *ngIf="loggedIn" 
-          (click)="Back()"
-          style="margin-left: 10px;" >
+          (click)="Back()">
           Back
         </button>
-        </div>
-      <div style="text-align: right;">
         <button
           class="btn btn-outline-danger btn-sm" 
           *ngIf="loggedIn" 
-          (click)="logout()"
-          style="margin-left: 10px;" >
+          (click)="logout()">
           Log Out
         </button>
-        </div>
+      </div>
     </div>
   </div>
 </nav>
-

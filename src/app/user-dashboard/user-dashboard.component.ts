@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
   styleUrl: './user-dashboard.component.css'
 })
 export class UserDashboardComponent implements OnInit, AfterViewInit{
-[x: string]: any;
 
 movies: any[] = []; 
 selectedMovie: Movie | null = null; 
@@ -38,6 +37,7 @@ targetedMovie: any;
 favMovie: any;
 errormsg: any;
 isFavoriteMovies: boolean = true;
+favoriteMovies: any;
 
   constructor(private route: Router,private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
   ngAfterViewInit(): void {
@@ -131,6 +131,4 @@ isFavoriteMovies: boolean = true;
 
 }
   }
-
-  
 
