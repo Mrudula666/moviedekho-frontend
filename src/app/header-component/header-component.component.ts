@@ -17,6 +17,8 @@ export class HeaderComponentComponent implements OnInit{
 
 
   loggedIn: boolean = false;
+  loggedInAndIsUser: boolean = false;
+  loggedInAndIsAdmin: boolean = false;
    user: any;
 
   constructor(private router: Router, private http: HttpClient, private apiService: ApiService,private tokenService: TokenService, private location: Location) {
@@ -25,6 +27,9 @@ export class HeaderComponentComponent implements OnInit{
         if(sessionStorage.getItem('userLogin')){
          this.loggedIn = true;
          const userDetails = JSON.parse(sessionStorage.getItem('userDetails'));
+         if(userDetails.roleNames.includes("ROLE_USER")){
+          this.loggedInAndIsUser = true;
+         }
          this.user = userDetails.username;
         }
       }
