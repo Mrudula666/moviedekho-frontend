@@ -26,7 +26,7 @@ export class TokenService {
     console.log(token)
     if (token && this.isTokenExpired(token)) {
       sessionStorage.removeItem('userLogin'); 
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
     }
   }
 }

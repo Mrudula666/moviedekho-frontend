@@ -18,10 +18,11 @@ export class HeaderComponentComponent implements OnInit{
 
   loggedIn: boolean = false;
   loggedInAndIsUser: boolean = false;
-  loggedInAndIsAdmin: boolean = false;
    user: any;
 
-  constructor(private router: Router, private http: HttpClient, private apiService: ApiService,private tokenService: TokenService, private location: Location) {
+  constructor(private router: Router, private http: HttpClient, 
+    private apiService: ApiService,
+    private tokenService: TokenService, private location: Location) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         if(sessionStorage.getItem('userLogin')){
@@ -30,7 +31,6 @@ export class HeaderComponentComponent implements OnInit{
          if(userDetails.roleNames.includes("ROLE_USER")){
           this.loggedInAndIsUser = true;
          }
-         this.user = userDetails.username;
         }
       }
  }

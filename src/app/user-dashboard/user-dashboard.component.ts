@@ -38,6 +38,7 @@ favMovie: any;
 errormsg: any;
 isFavoriteMovies: boolean = true;
 favoriteMovies: any;
+favMovieTitles: any[] = [];
 
   constructor(private route: Router,private http: HttpClient,private apiService: ApiService, private authService: AuthService) {}
   ngAfterViewInit(): void {
@@ -48,6 +49,7 @@ favoriteMovies: any;
   ngOnInit(): void {
     this.searchMovies();
     this.getAllMovies();
+    sessionStorage.setItem('addFavorite', 'True');
   }
    token = sessionStorage.getItem('token');
    user = JSON.parse(sessionStorage.getItem('userDetails'));
@@ -58,6 +60,23 @@ favoriteMovies: any;
         console.log(res)
         this.movies = res;  
         
+      this.http.get(this.apiService.getFavoriteMovies(this.user.username)).subscribe({
+        next:(res:any) => {
+
+        this.isFavoriteMovies = false;
+        console.log(res)
+        this.favMovieTitles = res.map((data: any) => data.title)
+        for(let i of this.movies){
+          if(this.favMovieTitles.includes(i.title)){
+              i.favoriteMovie = true
+          }
+          else{
+              i.favoriteMovie = false
+          }
+      }
+      console.log("Test",this.movies)
+      }
+    });
       },
       error(err) {
         console.error("Error.....")
@@ -104,22 +123,6 @@ favoriteMovies: any;
   
   }
 
-  addFavorite(title: any){
-  
-    this.http.post(this.apiService.addFavoriteMovie(), {username: this.user.username,
-      movieTitle: title}).subscribe({
-      next:(res:any) =>{
-        console.log(res)
-        sessionStorage.setItem('addFavorite', 'True');
-      },
-      error(err) {
-        console.error("Error.....")
-        
-      },
-    });
-
-  }
-
   getUserFavMovies(){
     this.http.get(this.apiService.getFavoriteMovies(this.user.username)).subscribe({
       next:(res:any) => {
@@ -128,6 +131,59 @@ favoriteMovies: any;
         this.movies = res;
       }
     });
+
+}
+
+selectFav(title: any, task: any, event: Event){
+  event.stopPropagation();
+  if(task === 'add'){
+    this.addFavorite(title);
+  } 
+
+  if(task === 'remove'){
+    this.removeFavorite(title);
+  } 
+
+}
+
+toggleFavorite(movie: any, event: Event) {
+  event.stopPropagation();
+
+  if (!movie.favorited) {
+    this.addFavorite(movie.title);
+  } else {
+    this.removeFavorite(movie.title);
+  }
+}
+
+removeFavorite(title: any) {
+  this.http
+    .delete(this.apiService.removeFavoriteMovie(this.user.username, title)).subscribe({
+      next:(res:any) => {
+        console.log(res);
+        this.getAllMovies();
+        sessionStorage.setItem('addFavorite', 'False');
+      },
+      error(err){
+        console.error('Error....')
+      }
+    });
+}
+
+addFavorite(title: any){
+  
+  this.http.post(this.apiService.addFavoriteMovie(), {username: this.user.username,
+    movieTitle: title}).subscribe({
+    next:(res:any) =>{
+      console.log(res)
+      this.getAllMovies();
+      sessionStorage.setItem('addFavorite', 'True');
+    },
+    error(err) {
+      console.error("Error.....")
+      
+    },
+  });
 
 }
   }

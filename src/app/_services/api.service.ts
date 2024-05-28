@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
+  
 
  
    movieURL = "http://localhost:8082/api/movie";
@@ -56,6 +57,10 @@ export class ApiService {
 
   getFavoriteMovies(username: any): any {
     return (`${this.userURL}/getFavoriteMovies/${username}`)
+  }
+
+  removeFavoriteMovie(username: any, title: any): any {
+    return (`${this.userURL}/removeFavoriteMovie?username=${username}&title=${title}`)
   }
 }
 
